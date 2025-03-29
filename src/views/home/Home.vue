@@ -8,52 +8,52 @@
         default-icon-bg-color="#e3f2fd"
         default-icon-color="#1976d2"
         size="50"
+        @click="openWindow('/about', '用户管理')"
     />
+
+    <!-- 动态渲染所有活动窗口 -->
+    <template v-for="window in activeWindows" :key="window.id">
+      <DraggableModal
+          v-model:visible="window.visible"
+          :title="window.title"
+          :window-id="window.id"
+          @close="closeWindow(window.id)"
+      >
+        <!-- 直接使用router-view -->
+        <router-view v-if="window.visible" />
+      </DraggableModal>
+    </template>
+
     <TabBar />
-    <button @click="openModal('page1')">Open Page 1</button>
-    <DraggableModal
-        v-model:visible="modalVisible"
-        :title="modalTitle"
-    >
-      <router-view />
-    </DraggableModal>
   </div>
 </template>
 
-<script setup >
+<script setup>
 import TabBar from "@/components/TabBar.vue";
 import FlexIcon from "@/components/FlexIcon.vue";
 import DraggableModal from '@/components/DraggableModal.vue'
-import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
+import useWindowManager from '@/util/useWindowManager'
 
-defineOptions({ name: 'home' })
+const { windows, activeWindows, openWindow, closeWindow } = useWindowManager()
 
-const router = useRouter()
-const modalVisible = ref(false)
-const currentModal = ref('')
+// 示例：打开不同路由的窗口
+const openUserManagement = () => {
+  openWindow('/user-management', '用户管理')
+}
 
-const modalTitle = computed(() => {
-  return currentModal.value === 'page1'
-      ? 'Page 1 Title'
-      : 'Page 2 Title'
-})
-
-const openModal = (page) => {
-  currentModal.value = page
-  router.push('/page')
-  modalVisible.value = true
+const openSettings = () => {
+  openWindow('/settings', '系统设置')
 }
 </script>
 
 <style scoped>
 .icon-grid {
   display: flex;
-  flex-wrap: wrap; /* 允许换行 */
-  flex-direction: column; /* 主方向为垂直 */
-  align-content: flex-start; /* 多列对齐方式 */
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-content: flex-start;
   max-height: 100vh;
-  gap: 16px; /* 图标间距 */
+  gap: 16px;
   padding: 20px;
 }
 </style>
