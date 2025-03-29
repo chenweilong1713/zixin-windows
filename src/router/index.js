@@ -7,15 +7,22 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
-      children:{
-        path: 'page',
-        component: () => import('@/views/Page.vue')
-      }
+      children:[
+        {
+          path: 'about',
+          name: 'about',
+          // 添加 meta 标识这是窗口内容
+          meta: { isWindow: true },
+          component: () => import('../views/AboutView.vue')
+        },
+      ]
     },
     // {
     //   path: '/about',
     //   name: 'about',
-    //   component: () => import('../views/AboutView.vue'),
+    //   // 添加 meta 标识这是窗口内容
+    //   meta: { isWindow: true },
+    //   component: () => import('../views/AboutView.vue')
     // },
   ],
 })
