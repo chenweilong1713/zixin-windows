@@ -7,15 +7,6 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
-      children:[
-        {
-          path: 'about',
-          name: 'about',
-          // 添加 meta 标识这是窗口内容
-          meta: { isWindow: true },
-          component: () => import('../views/AboutView.vue')
-        },
-      ]
     },
     // {
     //   path: '/about',

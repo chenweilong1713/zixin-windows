@@ -1,8 +1,6 @@
 <template>
   <div class="icon-grid">
     <FlexIcon
-        v-for="item in 15"
-        :key="item"
         text="用户管理"
         default-text="U"
         default-icon-bg-color="#e3f2fd"
@@ -10,7 +8,14 @@
         size="50"
         @click="openWindow('/about', '用户管理')"
     />
-
+    <FlexIcon
+        text="测试"
+        default-text="U"
+        default-icon-bg-color="#e3f2fd"
+        default-icon-color="#1976d2"
+        size="50"
+        @click="openWindow('/h', '测试')"
+    />
     <!-- 动态渲染所有活动窗口 -->
     <template v-for="window in activeWindows" :key="window.id">
       <DraggableModal
@@ -19,8 +24,6 @@
           :window-id="window.id"
           @close="closeWindow(window.id)"
       >
-        <!-- 直接使用router-view -->
-        <router-view v-if="window.visible" />
       </DraggableModal>
     </template>
 
@@ -33,9 +36,7 @@ import TabBar from "@/components/TabBar.vue";
 import FlexIcon from "@/components/FlexIcon.vue";
 import DraggableModal from '@/components/DraggableModal.vue'
 import useWindowManager from '@/util/useWindowManager'
-
 const { windows, activeWindows, openWindow, closeWindow } = useWindowManager()
-
 // 示例：打开不同路由的窗口
 const openUserManagement = () => {
   openWindow('/user-management', '用户管理')

@@ -8,14 +8,6 @@ export default function useWindowManager() {
     // 打开新窗口
     const openWindow = (routePath, title = '新窗口') => {
         const windowId = `window_${Date.now()}`
-
-        // 先导航到目标路由
-        router.push({
-            path: routePath,
-            // 关键：传递窗口ID作为路由参数
-            params: { windowId }
-        })
-
         // 再创建窗口记录
         windows.value.push({
             id: windowId,
