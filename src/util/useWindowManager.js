@@ -1,21 +1,20 @@
 import { ref, computed } from 'vue'
-import { useRouter } from 'vue-router'
 
 export default function useWindowManager() {
-    const router = useRouter()
     const windows = ref([])
 
     // 打开新窗口
-    const openWindow = (routePath, title = '新窗口') => {
+    const openWindow = (component, componentProps = {}, title = '新窗口') => {
         const windowId = `window_${Date.now()}`
-        // 再创建窗口记录
+
         windows.value.push({
             id: windowId,
-            routePath,
+            component,
+            componentProps,
             title,
             visible: true,
             position: { x: 100 + (windows.value.length * 30), y: 100 + (windows.value.length * 30) },
-            size: { width: 600, height: 400 }
+            size: { width: 1600, height: 400 }
         })
 
         return windowId

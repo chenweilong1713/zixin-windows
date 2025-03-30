@@ -20,24 +20,19 @@
         <button @click="closeWindow" class="control-btn close-btn">×</button>
       </div>
     </div>
-<!--    <div class="window-content">-->
-<!--      <router-view v-slot="{ Component }">-->
-<!--        <keep-alive>-->
-<!--          <component :is="Component" />-->
-<!--        </keep-alive>-->
-<!--      </router-view>-->
-<!--    </div>-->
     <div class="window-content">
-      <!-- 使用窗口ID作为key强制重新渲染 -->
-      <router-view :key="windowId" />
+      <!-- 动态组件容器 -->
+      <keep-alive>
+        <component :is="component" v-bind="componentProps" />
+      </keep-alive>
     </div>
     <div class="window-resize-handle" @mousedown="startResize"></div>
   </div>
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
+import { ref, reactive, onMounted, onUnmounted, watch, computed } from 'vue'
 
 const props = defineProps({
   title: {
@@ -54,13 +49,22 @@ const props = defineProps({
   },
   initialPosition: {
     type: Object,
-    default: () => ({ x: 100, y: 100 })
+    default: () => ({ x: 300, y: 120 })
   },
   initialSize: {
     type: Object,
-    default: () => ({ width: 600, height: 400 })
+    default: () => ({ width: 900, height: 500 })
+  },
+  component: {
+    type: [Object, String],
+    required: true
+  },
+  componentProps: {
+    type: Object,
+    default: () => ({})
   }
 })
+
 
 const emit = defineEmits(['update:visible', 'close'])
 
@@ -262,6 +266,7 @@ onUnmounted(() => {
   border-bottom: 1px solid #ddd;
   cursor: move;
   display: flex;
+  height: 35px;
   justify-content: space-between;
   align-items: center;
   user-select: none;
