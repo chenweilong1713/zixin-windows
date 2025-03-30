@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from "@/views/home/Home.vue";
+import Home from "@/views/Home.vue";
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -8,13 +8,12 @@ const router = createRouter({
       name: 'home',
       component: Home,
     },
-    // {
-    //   path: '/about',
-    //   name: 'about',
-    //   // 添加 meta 标识这是窗口内容
-    //   meta: { isWindow: true },
-    //   component: () => import('../views/AboutView.vue')
-    // },
+    {
+      path: '/hello',
+      name: 'hello',
+      // 添加 meta 标识这是窗口内容
+      component: () => import('../views/Hello.vue')
+    },
   ],
 })
 
