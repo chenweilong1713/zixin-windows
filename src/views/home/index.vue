@@ -1,6 +1,6 @@
 <template>
   <div class="icon-grid">
-    <FlexIcon
+    <DesktopMenu
         text="用户管理"
         default-text="U"
         default-icon-bg-color="#e3f2fd"
@@ -8,7 +8,7 @@
         size="50"
         @click="openWindow(Hello, {},'hello')"
     />
-    <FlexIcon
+    <DesktopMenu
         text="用户管理"
         default-text="U"
         default-icon-bg-color="#e3f2fd"
@@ -35,7 +35,7 @@
 
 <script setup>
 import TabBar from "@/components/desktop/TabBar.vue";
-import FlexIcon from "@/components/desktop/FlexIcon.vue";
+import DesktopMenu from "@/components/desktop/DesktopMenu.vue";
 import DraggableModal from '@/components/desktop/DraggableModal.vue'
 import useWindowManager from '@/util/useWindowManager.js'
 
