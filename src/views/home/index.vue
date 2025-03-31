@@ -19,22 +19,32 @@
     <button @click="console.log(activeWindows)">获取激活的信息</button>
     <button @click="console.log(windows)">获取所有存储的窗口</button>
 
+    <template v-for="item in windows">
+    <button v-if="!item.visible" @click="restoreWindow(item.id)">打开{{item.title}}</button>
+
+    </template>
+
   </div>
 
   <!-- 动态渲染窗口 -->
-  <template v-for="window in activeWindows" :key="window.id">
-    <DraggableModal
-        v-model:visible="window.visible"
-        :title="window.title"
-        :window-id="window.id"
-        :z-index="window.zIndex"
-        :component="window.component"
-        :initial-position="window.position"
-        :initial-size="window.size"
-        :component-props="window.componentProps"
-        @close="closeWindow(window.id)"
-        @bring-to-front="bringToFront"
-    />
+  <template v-for="window in windows" :key="window.id">
+    <keep-alive>
+      <DraggableModal
+          v-if="window.visible"
+          v-model:visible="window.visible"
+          :title="window.title"
+          :window-id="window.id"
+          :z-index="window.zIndex"
+          :component="window.component"
+          :initial-position="window.position"
+          :initial-size="window.size"
+          :component-props="window.componentProps"
+          @hide-window="hideWindow(window.id)"
+          @close="closeWindow(window.id)"
+          @bring-to-front="bringToFront(window.id)"
+      />
+    </keep-alive>
+
   </template>
 
   <TabBar />
@@ -49,7 +59,7 @@ import Hello from "@/views/Hello.vue";
 import Word from "@/views/Word.vue";
 
 const windowManager = useWindowManagerStore();
-const { windows,activeWindows, openWindow, closeWindow, bringToFront} = windowManager;
+const { windows,openWindow,hideWindow,restoreWindow,hiddenWindows, closeWindow, bringToFront} = windowManager;
 
 
 </script>
