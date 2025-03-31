@@ -16,13 +16,13 @@
         size="50"
         @click="openWindow(Word, {}, '文档编辑')"
     />
-    <button @click="console.log(activeWindows)">获取激活的信息</button>
-    <button @click="console.log(windows)">获取所有存储的窗口</button>
+<!--    <button @click="console.log(activeWindows)">获取激活的信息</button>-->
+<!--    <button @click="console.log(windows)">获取所有存储的窗口</button>-->
 
-    <template v-for="item in windows">
-    <button v-if="!item.visible" @click="restoreWindow(item.id)">打开{{item.title}}</button>
+<!--    <template v-for="item in windows">-->
+<!--      <button v-if="!item.visible" @click="restoreWindow(item.id)">打开{{ item.title }}</button>-->
 
-    </template>
+<!--    </template>-->
 
   </div>
 
@@ -47,11 +47,11 @@
 
   </template>
 
-  <TabBar />
+  <TabBar v-if="windows.filter(e=>!e.visible).length >0"/>
 </template>
 
 <script setup>
-import { useWindowManagerStore } from '@/stores/windowManagerStore.js';
+import {useWindowManagerStore} from '@/stores/windowManagerStore.js';
 import DesktopMenu from "@/components/desktop/DesktopMenu.vue";
 import DraggableModal from '@/components/desktop/DraggableModal.vue';
 import TabBar from "@/components/desktop/TabBar.vue";
@@ -59,7 +59,7 @@ import Hello from "@/views/Hello.vue";
 import Word from "@/views/Word.vue";
 
 const windowManager = useWindowManagerStore();
-const { windows,openWindow,hideWindow,restoreWindow,hiddenWindows, closeWindow, bringToFront} = windowManager;
+const {windows, openWindow, hideWindow, restoreWindow, hiddenWindows, closeWindow, bringToFront} = windowManager;
 
 
 </script>
