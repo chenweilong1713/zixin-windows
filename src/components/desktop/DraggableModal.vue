@@ -22,9 +22,7 @@
     </div>
     <div class="window-content">
       <!-- 动态组件容器 -->
-      <keep-alive>
         <component :is="component" v-bind="componentProps"/>
-      </keep-alive>
     </div>
     <div class="window-resize-handle" @mousedown="startResize"></div>
   </div>
@@ -69,7 +67,7 @@ const props = defineProps({
 })
 
 
-const emit = defineEmits(['update:visible', 'close', 'bringToFront'])
+const emit = defineEmits(['update:visible', 'close', 'bringToFront','hideWindow'])
 
 const windowRef = ref(null)
 const position = reactive({...props.initialPosition})
@@ -194,19 +192,20 @@ const stopResize = () => {
 
 // 最小化
 const minimize = () => {
-  if (isMinimized.value) {
-    // 恢复
-    size.width = originalSize.width
-    size.height = originalSize.height
-  } else {
-    // 最小化
-    originalSize.width = size.width
-    originalSize.height = size.height
-    size.width = 300
-    size.height = 40 // 只保留标题栏高度
-  }
-
-  isMinimized.value = !isMinimized.value
+  emit('hideWindow', props.windowId)
+  // if (isMinimized.value) {
+  //   // 恢复
+  //   size.width = originalSize.width
+  //   size.height = originalSize.height
+  // } else {
+  //   // 最小化
+  //   originalSize.width = size.width
+  //   originalSize.height = size.height
+  //   size.width = 300
+  //   size.height = 40 // 只保留标题栏高度
+  // }
+  //
+  // isMinimized.value = !isMinimized.value
 }
 
 // 最大化/恢复
