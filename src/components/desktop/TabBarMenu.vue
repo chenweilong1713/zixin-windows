@@ -65,6 +65,7 @@ const handleClick = () => {
   cursor: pointer;
   margin-top: 8px;
   margin-left: 5px;
+  margin-right: 5px;
   width: calc(v-bind('typeof props.size === "number" ? props.size + "px" : props.size') + 16px);
   transition: all 0.2s ease;
 }
