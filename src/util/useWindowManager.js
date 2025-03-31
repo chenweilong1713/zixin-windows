@@ -68,6 +68,7 @@ export default function useWindowManager() {
         windows,
         activeWindows,
         openWindow,
-        closeWindow
+        closeWindow,
+        bringToFront
     }
 }
