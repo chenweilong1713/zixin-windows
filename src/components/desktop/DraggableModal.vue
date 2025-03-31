@@ -31,7 +31,6 @@
 </template>
 
 <script setup>
-import { useRoute } from 'vue-router'
 import { ref, reactive, onMounted, onUnmounted, watch, computed } from 'vue'
 
 const props = defineProps({
@@ -62,21 +61,25 @@ const props = defineProps({
   componentProps: {
     type: Object,
     default: () => ({})
+  },
+  zIndex: {
+    type: Number,
+    default: 1
   }
 })
 
 
-const emit = defineEmits(['update:visible', 'close'])
+const emit = defineEmits(['update:visible', 'close','bring-to-front'])
 
-const route = useRoute()
 const windowRef = ref(null)
 const position = reactive({ ...props.initialPosition })
 const size = reactive({ ...props.initialSize })
 const isDragging = ref(false)
 const isResizing = ref(false)
 const startPos = reactive({ x: 0, y: 0 })
-const zIndex = ref(1)
-let maxZIndex = 1
+// const zIndex = ref()
+// let maxZIndex = 1
+
 
 // 最小化状态
 const isMinimized = ref(false)
@@ -87,18 +90,20 @@ const isMaximized = ref(false)
 const originalPosition = reactive({ ...props.initialPosition })
 
 // 计算最大zIndex
-const updateMaxZIndex = () => {
-  const windows = document.querySelectorAll('.draggable-window')
-  maxZIndex = Array.from(windows).reduce((max, window) => {
-    const z = parseInt(window.style.zIndex) || 1
-    return Math.max(max, z)
-  }, 1)
-}
+// const updateMaxZIndex = () => {
+//   const windows = document.querySelectorAll('.draggable-window')
+//   maxZIndex = Array.from(windows).reduce((max, window) => {
+//     const z = parseInt(window.style.zIndex) || 1
+//     return Math.max(max, z)
+//   }, 1)
+// }
 
 // 置顶窗口
 const bringToFront = () => {
-  updateMaxZIndex()
-  zIndex.value = maxZIndex + 1
+  // updateMaxZIndex()
+  // zIndex.value = maxZIndex + 1
+
+  emit('bring-to-front', false)
 }
 
 // 开始拖拽
@@ -236,7 +241,7 @@ const closeWindow = () => {
 
 // 组件挂载时更新最大zIndex
 onMounted(() => {
-  updateMaxZIndex()
+  // updateMaxZIndex()
 })
 
 // 组件卸载时移除事件监听器

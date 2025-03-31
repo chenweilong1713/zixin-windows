@@ -23,9 +23,11 @@
           v-model:visible="window.visible"
           :title="window.title"
           :window-id="window.id"
+          :z-index="window.zIndex"
           :component="window.component"
           :component-props="window.componentProps"
           @close="closeWindow(window.id)"
+          @bring-to-front="bringToFront"
       />
     </template>
 
@@ -39,7 +41,7 @@ import DesktopMenu from "@/components/desktop/DesktopMenu.vue";
 import DraggableModal from '@/components/desktop/DraggableModal.vue'
 import useWindowManager from '@/util/useWindowManager.js'
 
-const {windows, activeWindows, openWindow, closeWindow} = useWindowManager()
+const {windows, activeWindows, openWindow, closeWindow,bringToFront} = useWindowManager()
 import Hello from "@/views/Hello.vue";
 import Word from "@/views/Word.vue";
 // 示例：打开不同路由的窗口
