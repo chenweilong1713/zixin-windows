@@ -6,20 +6,22 @@
         default-icon-bg-color="#e3f2fd"
         default-icon-color="#1976d2"
         size="50"
-        @click="openWindow(Hello, {},'hello')"
+        @click="openWindow(Hello, {}, '用户管理')"
     />
     <DesktopMenu
-        text="用户管理"
-        default-text="U"
+        text="文档编辑"
+        default-text="W"
         default-icon-bg-color="#e3f2fd"
         default-icon-color="#1976d2"
         size="50"
-        @click="openWindow(Word, {},'word')"
+        @click="openWindow(Word, {}, '文档编辑')"
     />
-
+    <button @click="console.log(activeWindows)">获取激活的信息</button>
+    <button @click="console.log(windows)">获取所有存储的窗口</button>
 
   </div>
-  <!-- 动态渲染所有活动窗口 -->
+
+  <!-- 动态渲染窗口 -->
   <template v-for="window in activeWindows" :key="window.id">
     <DraggableModal
         v-model:visible="window.visible"
@@ -31,25 +33,29 @@
         :initial-size="window.size"
         :component-props="window.componentProps"
         @close="closeWindow(window.id)"
-        @bring-to-front="args => bringToFront(args)"
+        @bring-to-front="bringToFront"
     />
   </template>
 
-  <TabBar/>
+  <TabBar />
 </template>
 
 <script setup>
-import TabBar from "@/components/desktop/TabBar.vue";
+import { useWindowManagerStore } from '@/stores/windowManagerStore.js';
 import DesktopMenu from "@/components/desktop/DesktopMenu.vue";
-import DraggableModal from '@/components/desktop/DraggableModal.vue'
-import useWindowManager from '@/util/useWindowManager.js'
-const {windows, activeWindows, openWindow, closeWindow,bringToFront} = useWindowManager()
+import DraggableModal from '@/components/desktop/DraggableModal.vue';
+import TabBar from "@/components/desktop/TabBar.vue";
 import Hello from "@/views/Hello.vue";
 import Word from "@/views/Word.vue";
+
+const windowManager = useWindowManagerStore();
+const { windows,activeWindows, openWindow, closeWindow, bringToFront} = windowManager;
+
 
 </script>
 
 <style scoped>
+/* 原有样式保持不变 */
 .icon-grid {
   display: flex;
   flex-wrap: wrap;
