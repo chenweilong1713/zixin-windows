@@ -1,16 +1,16 @@
 <template>
   <div id="tabBar">
-    <Menu
+    <TabBarMenu
         name="New App"
         default-icon-text="NA"
         size="40"
     />
-    <Menu
+    <TabBarMenu
         name="New App"
         default-icon-text="NA"
         size="40"
     />
-    <Menu
+    <TabBarMenu
         name="New App"
         default-icon-text="NA"
         size="40"
@@ -19,7 +19,7 @@
 </template>
 
 <script setup>
-import Menu from "@/components/desktop/Menu.vue";
+import TabBarMenu from "@/components/desktop/TabBarMenu.vue";
 </script>
 
 <style scoped>
