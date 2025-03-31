@@ -17,22 +17,23 @@
         @click="openWindow(Word, {},'word')"
     />
 
-    <!-- 动态渲染所有活动窗口 -->
-    <template v-for="window in activeWindows" :key="window.id">
-      <DraggableModal
-          v-model:visible="window.visible"
-          :title="window.title"
-          :window-id="window.id"
-          :z-index="window.zIndex"
-          :component="window.component"
-          :component-props="window.componentProps"
-          @close="closeWindow(window.id)"
-          @bring-to-front="bringToFront"
-      />
-    </template>
 
-    <TabBar/>
   </div>
+  <!-- 动态渲染所有活动窗口 -->
+  <template v-for="window in activeWindows" :key="window.id">
+    <DraggableModal
+        v-model:visible="window.visible"
+        :title="window.title"
+        :window-id="window.id"
+        :z-index="window.zIndex"
+        :component="window.component"
+        :component-props="window.componentProps"
+        @close="closeWindow(window.id)"
+        @bring-to-front="args => bringToFront(args)"
+    />
+  </template>
+
+  <TabBar/>
 </template>
 
 <script setup>
@@ -42,6 +43,7 @@ import DraggableModal from '@/components/desktop/DraggableModal.vue'
 import useWindowManager from '@/util/useWindowManager.js'
 
 const {windows, activeWindows, openWindow, closeWindow,bringToFront} = useWindowManager()
+
 import Hello from "@/views/Hello.vue";
 import Word from "@/views/Word.vue";
 // 示例：打开不同路由的窗口

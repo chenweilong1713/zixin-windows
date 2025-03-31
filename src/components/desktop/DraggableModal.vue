@@ -10,7 +10,7 @@
       zIndex: zIndex,
       display: visible ? 'flex' : 'none'
     }"
-      @mousedown="bringToFront"
+      @mousedown="mousedownClick"
   >
     <div class="window-header" @mousedown="startDrag">
       <span class="window-title">{{ title }}</span>
@@ -23,7 +23,7 @@
     <div class="window-content">
       <!-- 动态组件容器 -->
       <keep-alive>
-        <component :is="component" v-bind="componentProps" />
+        <component :is="component" v-bind="componentProps"/>
       </keep-alive>
     </div>
     <div class="window-resize-handle" @mousedown="startResize"></div>
@@ -31,7 +31,7 @@
 </template>
 
 <script setup>
-import { ref, reactive, onMounted, onUnmounted, watch, computed } from 'vue'
+import {ref, reactive, onMounted, onUnmounted} from 'vue'
 
 const props = defineProps({
   title: {
@@ -48,11 +48,11 @@ const props = defineProps({
   },
   initialPosition: {
     type: Object,
-    default: () => ({ x: 300, y: 120 })
+    default: () => ({x: 400, y: 120})
   },
   initialSize: {
     type: Object,
-    default: () => ({ width: 900, height: 500 })
+    default: () => ({width: 900, height: 500})
   },
   component: {
     type: [Object, String],
@@ -69,25 +69,25 @@ const props = defineProps({
 })
 
 
-const emit = defineEmits(['update:visible', 'close','bring-to-front'])
+const emit = defineEmits(['update:visible', 'close', 'bringToFront'])
 
 const windowRef = ref(null)
-const position = reactive({ ...props.initialPosition })
-const size = reactive({ ...props.initialSize })
+const position = reactive({...props.initialPosition})
+const size = reactive({...props.initialSize})
 const isDragging = ref(false)
 const isResizing = ref(false)
-const startPos = reactive({ x: 0, y: 0 })
+const startPos = reactive({x: 0, y: 0})
 // const zIndex = ref()
 // let maxZIndex = 1
 
 
 // 最小化状态
 const isMinimized = ref(false)
-const originalSize = reactive({ ...props.initialSize })
+const originalSize = reactive({...props.initialSize})
 
 // 最大化状态
 const isMaximized = ref(false)
-const originalPosition = reactive({ ...props.initialPosition })
+const originalPosition = reactive({...props.initialPosition})
 
 // 计算最大zIndex
 // const updateMaxZIndex = () => {
@@ -99,11 +99,11 @@ const originalPosition = reactive({ ...props.initialPosition })
 // }
 
 // 置顶窗口
-const bringToFront = () => {
+const mousedownClick = () => {
   // updateMaxZIndex()
   // zIndex.value = maxZIndex + 1
-
-  emit('bring-to-front', false)
+  console.log("点击了")
+  emit('bringToFront', props.windowId)
 }
 
 // 开始拖拽
