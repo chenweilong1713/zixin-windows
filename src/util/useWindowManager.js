@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue'
+import { ref, computed,markRaw } from 'vue'
 
 export default function useWindowManager() {
     const windows = ref([])
@@ -7,9 +7,12 @@ export default function useWindowManager() {
     const openWindow = (component, componentProps = {}, title = '新窗口') => {
         const windowId = `window_${Date.now()}`
 
+
+
+
         windows.value.push({
             id: windowId,
-            component,
+            component:markRaw(component),
             componentProps,
             title,
             visible: true,

@@ -15,36 +15,11 @@
         default-icon-text="NA"
         size="40"
     />
-    <Menu
-        name="New App"
-        default-icon-text="NA"
-        size="40"
-    />
-    <Menu
-        name="New App"
-        default-icon-text="NA"
-        size="40"
-    />
-    <Menu
-        name="New App"
-        default-icon-text="NA"
-        size="40"
-    />
-    <Menu
-        name="New App"
-        default-icon-text="NA"
-        size="40"
-    />
-    <Menu
-        name="New App"
-        default-icon-text="NA"
-        size="40"
-    />
   </div>
 </template>
 
 <script setup>
-import Menu from "@/components/Menu.vue";
+import Menu from "@/components/desktop/Menu.vue";
 </script>
 
 <style scoped>
