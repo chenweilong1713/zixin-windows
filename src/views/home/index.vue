@@ -34,9 +34,9 @@
 </template>
 
 <script setup>
-import TabBar from "@/components/TabBar.vue";
-import FlexIcon from "@/components/FlexIcon.vue";
-import DraggableModal from '@/components/DraggableModal.vue'
+import TabBar from "@/components/desktop/TabBar.vue";
+import FlexIcon from "@/components/desktop/FlexIcon.vue";
+import DraggableModal from '@/components/desktop/DraggableModal.vue'
 import useWindowManager from '@/util/useWindowManager.js'
 
 const {windows, activeWindows, openWindow, closeWindow} = useWindowManager()
@@ -58,8 +58,10 @@ import Word from "@/views/Word.vue";
   flex-wrap: wrap;
   flex-direction: column;
   align-content: flex-start;
+  min-height: 100vh;
   max-height: 100vh;
   gap: 16px;
   padding: 20px;
+  background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
 }
 </style>
