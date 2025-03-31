@@ -43,19 +43,10 @@ import TabBar from "@/components/desktop/TabBar.vue";
 import DesktopMenu from "@/components/desktop/DesktopMenu.vue";
 import DraggableModal from '@/components/desktop/DraggableModal.vue'
 import useWindowManager from '@/util/useWindowManager.js'
-
 const {windows, activeWindows, openWindow, closeWindow,bringToFront} = useWindowManager()
-
 import Hello from "@/views/Hello.vue";
 import Word from "@/views/Word.vue";
-// 示例：打开不同路由的窗口
-// const openUserManagement = () => {
-//   openWindow('/user-management', '用户管理')
-// }
-//
-// const openSettings = () => {
-//   openWindow('/settings', '系统设置')
-// }
+
 </script>
 
 <style scoped>
