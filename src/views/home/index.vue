@@ -27,6 +27,8 @@
         :window-id="window.id"
         :z-index="window.zIndex"
         :component="window.component"
+        :initial-position="window.position"
+        :initial-size="window.size"
         :component-props="window.componentProps"
         @close="closeWindow(window.id)"
         @bring-to-front="args => bringToFront(args)"

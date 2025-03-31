@@ -38,15 +38,14 @@ export default function useWindowManager() {
             return existingWindow.id
         }
 
-
         windows.value.push({
             id: windowId,
             component:markRaw(component),
             componentProps,
             title,
             visible: true,
-            position: { x: 100 + (windows.value.length * 30), y: 100 + (windows.value.length * 30) },
-            size: { width: 1600, height: 400 },
+            position: { x: 300 + (windows.value.length * 30), y: 50 + (windows.value.length * 30) },
+            size: { width: 1100, height: 750 },
             zIndex: maxZIndex + 1
         })
 
