@@ -68,7 +68,7 @@ import Word from "@/views/Word.vue";
 import SnakeGame from "@/apps/snake/SnakeGame.vue";
 
 const windowManager = useWindowManagerStore();
-const {windows, openWindow, hideWindow, restoreWindow, hiddenWindows, closeWindow, bringToFront} = windowManager;
+const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManager;
 
 
 </script>
