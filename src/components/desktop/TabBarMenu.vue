@@ -71,7 +71,7 @@ const handleClick = () => {
 }
 
 .software-icon:hover {
-  transform: translateY(-10px);
+  transform: translateY(-4px);
 }
 
 .icon-container {
