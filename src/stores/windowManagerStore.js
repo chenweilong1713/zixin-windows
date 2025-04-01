@@ -13,10 +13,13 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
             Math.max(max, window.zIndex || 1), 1);
     };
 
+    // 置顶窗口
     const bringToFront = (windowId) => {
         updateMaxZIndex();
         const window = windows.value.find(w => w.id === windowId);
-        if (window) window.zIndex = maxZIndex + 1;
+        if (window) {
+            window.zIndex = maxZIndex + 1;
+        }
     };
 
     // 隐藏窗口（从windows移到hiddenWindows）

@@ -16,6 +16,14 @@
         size="50"
         @click="openWindow(Word, {}, '文档编辑')"
     />
+    <DesktopMenu
+        text="贪吃蛇"
+        default-text="贪"
+        default-icon-bg-color="#e3f2fd"
+        default-icon-color="#1976d2"
+        size="50"
+        @click="openWindow(SnakeGame, {}, '贪吃蛇')"
+    />
 <!--    <button @click="console.log(activeWindows)">获取激活的信息</button>-->
 <!--    <button @click="console.log(windows)">获取所有存储的窗口</button>-->
 
@@ -57,6 +65,7 @@ import DraggableModal from '@/components/desktop/DraggableModal.vue';
 import TabBar from "@/components/desktop/TabBar.vue";
 import Hello from "@/views/Hello.vue";
 import Word from "@/views/Word.vue";
+import SnakeGame from "@/apps/snake/SnakeGame.vue";
 
 const windowManager = useWindowManagerStore();
 const {windows, openWindow, hideWindow, restoreWindow, hiddenWindows, closeWindow, bringToFront} = windowManager;
