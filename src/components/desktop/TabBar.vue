@@ -15,7 +15,7 @@
 import TabBarMenu from "@/components/desktop/TabBarMenu.vue";
 import { useWindowManagerStore } from '@/stores/windowManagerStore.js';
 const windowManager = useWindowManagerStore();
-const { windows,openWindow,hideWindow,restoreWindow,hiddenWindows, closeWindow, bringToFront} = windowManager;
+const { windows,hideWindow,restoreWindow,bringToFront} = windowManager;
 
 </script>
 

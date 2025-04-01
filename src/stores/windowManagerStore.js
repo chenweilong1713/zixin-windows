@@ -4,16 +4,20 @@ import { ref, markRaw } from 'vue';
 export const useWindowManagerStore = defineStore('windowManager', () => {
     // 状态
     const windows = ref([]);
-    const hiddenWindows = ref([]); // 存储隐藏的窗口
     let maxZIndex = 1;
 
-    // 方法
+    /**
+     * 更新最大zIndex
+     */
     const updateMaxZIndex = () => {
         maxZIndex = windows.value.reduce((max, window) =>
             Math.max(max, window.zIndex || 1), 1);
     };
 
-    // 置顶窗口
+    /**
+     * 置顶窗口
+     * @param windowId 窗口id
+     */
     const bringToFront = (windowId) => {
         updateMaxZIndex();
         const window = windows.value.find(w => w.id === windowId);
@@ -22,7 +26,10 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
         }
     };
 
-    // 隐藏窗口（从windows移到hiddenWindows）
+    /**
+     *  隐藏窗口（修改window对象的visible属性）
+     * @param windowId 窗口id
+     */
     const hideWindow = (windowId) => {
         const index = windows.value.findIndex(w => w.id === windowId);
         windows.value[index].visible = false
@@ -33,7 +40,10 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
         // }
     };
 
-    // 恢复窗口（从hiddenWindows移回windows）
+    /**
+     * 恢复窗口
+     * @param windowId
+     */
     const restoreWindow = (windowId) => {
         const index = windows.value.findIndex(w => w.id === windowId);
         windows.value[index].visible = true
@@ -46,7 +56,13 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
         // }
     };
 
-    // 打开新窗口（不再处理隐藏窗口的逻辑）
+    /**
+     * 打开新窗口
+     * @param component 窗口内显示的组件
+     * @param componentProps 传递给组件的属性
+     * @param title 标题
+     * @returns {*|string} 返回窗口Id
+     */
     const openWindow = (component, componentProps = {}, title = '新窗口') => {
         const rawComponent = markRaw(component);
 
@@ -80,6 +96,10 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
         return windowId;
     };
 
+    /**
+     * 关闭窗口（将window从windows数组中移除）
+     * @param windowId
+     */
     const closeWindow = (windowId) => {
         const index = windows.value.findIndex(w => w.id === windowId);
         if (index !== -1) {
@@ -89,11 +109,10 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
 
     return {
         windows,
-        hiddenWindows,
         openWindow,
         closeWindow,
         hideWindow,
-        restoreWindow, // 新增的独立恢复方法
+        restoreWindow,
         bringToFront
     };
 });
