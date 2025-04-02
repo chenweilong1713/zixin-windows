@@ -255,7 +255,7 @@ onUnmounted(() => {
 <style scoped>
 .draggable-window {
   position: fixed;
-  background-color: white;
+  background-color: #F6F7F9;
   border: 1px solid #ccc;
   border-radius: 4px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);

@@ -3,6 +3,7 @@
       class="flex-icon-container"
       :style="{
       width: size + 'px',
+      height: parseInt(size) + 15 + 'px',
       margin: margin
     }"
       @click="$emit('click')"
@@ -49,7 +50,7 @@
   </div>
 </template>
 
-<script setup >
+<script setup>
 defineProps({
   // 图标属性
   iconComponent: {
@@ -140,6 +141,7 @@ defineEmits(['click']);
 .icon {
   width: 100%;
   height: 100%;
+  border-radius: 20%;
   object-fit: contain;
 }
 
