@@ -2,25 +2,26 @@
   <div class="icon-grid">
     <DesktopMenu
         text="用户管理"
-        default-text="U"
+        default-text="用"
         default-icon-bg-color="#e3f2fd"
         default-icon-color="#1976d2"
         size="50"
         @click="openWindow(Hello, {}, '用户管理')"
     />
     <DesktopMenu
-        text="文档编辑"
-        default-text="W"
+        text="分类管理"
+        default-text="类"
         default-icon-bg-color="#e3f2fd"
         default-icon-color="#1976d2"
         size="50"
-        @click="openWindow(Word, {}, '文档编辑')"
+        @click="openWindow(Categories, {}, '分类管理')"
     />
     <DesktopMenu
         text="贪吃蛇"
         default-text="贪"
         default-icon-bg-color="#e3f2fd"
         default-icon-color="#1976d2"
+        :icon-component="SnakeIcon"
         size="50"
         @click="openWindow(SnakeGame, {}, '贪吃蛇')"
     />
@@ -66,6 +67,9 @@ import TabBar from "@/components/desktop/TabBar.vue";
 import Hello from "@/views/Hello.vue";
 import Word from "@/views/Word.vue";
 import SnakeGame from "@/apps/snake/SnakeGame.vue";
+import SnakeIcon from "@/components/icon/Snake.vue"
+import Categories from "@/apps/system/categories/Categories.vue";
+
 
 const windowManager = useWindowManagerStore();
 const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManager;
@@ -84,9 +88,11 @@ const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManag
   max-height: 100vh;
   gap: 16px;
   padding: 20px;
-  //background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
-  //background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
-  //background-image: linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%);
+  /*
+  background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
+  background-image: linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%);
+   */
   background-image: linear-gradient(-225deg, #7742B2 0%, #F180FF 52%, #FD8BD9 100%);
 }
 </style>
