@@ -21,6 +21,11 @@
             v-else-if="iconSrc"
             :src="iconSrc"
             :alt="text"
+            :style="{
+            backgroundColor: defaultIconBgColor,
+            color: defaultIconColor,
+            fontSize: iconSize
+          }"
             class="icon"
         />
         <div

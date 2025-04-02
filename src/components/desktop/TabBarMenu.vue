@@ -1,23 +1,31 @@
 <template>
-  <div class="software-icon" @click="handleClick">
+  <div class="software-icon"
+       @click="handleClick">
     <div class="icon-container">
-      <!-- 使用图标组件或图片 -->
-      <component
-          :is="iconComponent"
-          v-if="iconComponent"
-          class="icon"
-      />
-      <img
-          v-else-if="iconImage"
-          :src="iconImage"
-          :alt="name"
-          class="icon"
-      />
-      <div v-else class="default-icon">
-        {{ defaultIconText }}
-      </div>
+      <el-tooltip
+          effect="dark"
+          :content="name"
+          :offset="30"
+          placement="top"
+      >
+        <!-- 使用图标组件或图片 -->
+        <component
+            :is="iconComponent"
+            v-if="iconComponent"
+            class="icon"
+        />
+        <img
+            v-else-if="iconImage"
+            :src="iconImage"
+            :alt="name"
+            class="icon"
+        />
+        <div v-else class="default-icon">
+          {{ defaultIconText }}
+        </div>
+      </el-tooltip>
+
     </div>
-<!--    <div class="icon-name">{{ name }}</div>-->
   </div>
 </template>
 
@@ -66,7 +74,6 @@ const handleClick = () => {
   margin-top: 8px;
   margin-left: 5px;
   margin-right: 5px;
-  width: calc(v-bind('typeof props.size === "number" ? props.size + "px" : props.size') + 16px);
   transition: all 0.2s ease;
 }
 
@@ -75,8 +82,6 @@ const handleClick = () => {
 }
 
 .icon-container {
-  width: v-bind('typeof props.size === "number" ? props.size + "px" : props.size');
-  height: v-bind('typeof props.size === "number" ? props.size + "px" : props.size');
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,6 +90,9 @@ const handleClick = () => {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   padding: 12px;
   margin-bottom: 8px;
+  width: 45px;
+  height: 45px;
+  aspect-ratio: 1/1; /* 保持正方形 */
 }
 
 .icon {
@@ -94,7 +102,6 @@ const handleClick = () => {
 }
 
 .default-icon {
-  font-size: calc(v-bind('typeof props.size === "number" ? props.size + "px" : props.size') / 2);
   font-weight: bold;
   color: #4a6cf7;
 }

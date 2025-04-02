@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
-import { ref, markRaw } from 'vue';
+import {defineStore} from 'pinia';
+import {ref, markRaw} from 'vue';
 
 export const useWindowManagerStore = defineStore('windowManager', () => {
     // 状态
@@ -63,7 +63,7 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
      * @param title 标题
      * @returns {*|string} 返回窗口Id
      */
-    const openWindow = (component, componentProps = {}, title = '新窗口') => {
+    const openWindow = (component, componentProps = {}, title = '新窗口', iconComponent) => {
         const rawComponent = markRaw(component);
 
         // 检查是否已存在相同窗口（仅在visible窗口中检查）
@@ -80,20 +80,38 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
 
         // 创建新窗口
         const windowId = `window_${Date.now()}`;
-        windows.value.push({
-            id: windowId,
-            component: rawComponent,
-            componentProps,
-            title,
-            visible: true,
-            position: {
-                x: 300 + (windows.value.length * 30),
-                y: 50 + (windows.value.length * 30)
-            },
-            size: { width: 1100, height: 750 },
-            zIndex: maxZIndex + 1
-        });
+        if (iconComponent === undefined) {
+            windows.value.push({
+                id: windowId,
+                component: rawComponent,
+                componentProps,
+                title,
+                visible: true,
+                position: {
+                    x: 300 + (windows.value.length * 30),
+                    y: 50 + (windows.value.length * 30)
+                },
+                size: {width: 1100, height: 750},
+                zIndex: maxZIndex + 1
+            });
+        } else {
+            windows.value.push({
+                id: windowId,
+                component: rawComponent,
+                componentProps,
+                title,
+                visible: true,
+                iconComponent: markRaw(iconComponent),
+                position: {
+                    x: 300 + (windows.value.length * 30),
+                    y: 50 + (windows.value.length * 30)
+                },
+                size: {width: 1100, height: 750},
+                zIndex: maxZIndex + 1
+            });
+        }
         return windowId;
+
     };
 
     /**
