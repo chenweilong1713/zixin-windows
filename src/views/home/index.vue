@@ -21,9 +21,9 @@
         default-text="贪"
         default-icon-bg-color="#e3f2fd"
         default-icon-color="#1976d2"
-        :icon-component="SnakeIcon"
+        :icon-component="GameIcon"
         size="50"
-        @click="openWindow(SnakeGame, {}, '贪吃蛇')"
+        @click="openWindow(SnakeGame, {}, '贪吃蛇',GameIcon)"
     />
 <!--    <button @click="console.log(activeWindows)">获取激活的信息</button>-->
 <!--    <button @click="console.log(windows)">获取所有存储的窗口</button>-->
@@ -56,7 +56,7 @@
 
   </template>
 
-  <TabBar v-if="windows.filter(e=>!e.visible).length >0"/>
+  <TabBar />
 </template>
 
 <script setup>
@@ -67,7 +67,7 @@ import TabBar from "@/components/desktop/TabBar.vue";
 import Hello from "@/views/Hello.vue";
 import Word from "@/views/Word.vue";
 import SnakeGame from "@/apps/snake/SnakeGame.vue";
-import SnakeIcon from "@/components/icon/Snake.vue"
+import GameIcon from "@/components/icon/Game.vue"
 import Categories from "@/apps/system/categories/Categories.vue";
 
 

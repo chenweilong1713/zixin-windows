@@ -1,36 +1,38 @@
 <template>
-  <el-form :inline="true" :model="formInline" class="demo-form-inline">
-    <el-form-item label="分类名称">
-      <el-input v-model="formInline.user" placeholder="分类名称" clearable/>
-    </el-form-item>
-    <el-form-item label="状态">
-      <el-select
-          v-model="formInline.region"
-          placeholder="选择状态"
-          clearable
-      >
-        <el-option label="正常" value="shanghai"/>
-        <el-option label="禁用" value="beijing"/>
-      </el-select>
-    </el-form-item>
+  <el-card>
+    <el-form :inline="true" :model="formInline" class="demo-form-inline">
+      <el-form-item label="分类名称">
+        <el-input v-model="formInline.user" placeholder="分类名称" clearable/>
+      </el-form-item>
+      <el-form-item label="状态">
+        <el-select
+            v-model="formInline.region"
+            placeholder="选择状态"
+            clearable
+        >
+          <el-option label="正常" value="shanghai"/>
+          <el-option label="禁用" value="beijing"/>
+        </el-select>
+      </el-form-item>
 
-    <el-form-item>
-      <el-button type="primary" @click="onSubmit" :icon="Search" plain >查询</el-button>
-      <el-button type="primary" @click="onSubmit" plain>新增</el-button>
-      <el-button color="#626aef" @click="onSubmit" plain>导出</el-button>
-    </el-form-item>
-  </el-form>
-  <el-divider />
-  <el-table
-      :data="tableData"
-      border
-      style="width: 100%"
-      :row-class-name="tableRowClassName"
-  >
-    <el-table-column prop="date" label="Date" />
-    <el-table-column prop="name" label="Name"/>
-    <el-table-column prop="address" label="Address"/>
-  </el-table>
+      <el-form-item>
+        <el-button type="primary" @click="onSubmit" :icon="Search" plain >查询</el-button>
+        <el-button type="primary" @click="onSubmit" plain>新增</el-button>
+        <el-button color="#626aef" @click="onSubmit" plain>导出</el-button>
+      </el-form-item>
+    </el-form>
+    <el-table
+        :data="tableData"
+        border
+        style="width: 100%"
+        :row-class-name="tableRowClassName"
+    >
+      <el-table-column prop="date" label="Date" />
+      <el-table-column prop="name" label="Name"/>
+      <el-table-column prop="address" label="Address"/>
+    </el-table>
+  </el-card>
+
 </template>
 
 <script setup>

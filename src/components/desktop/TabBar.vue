@@ -1,9 +1,20 @@
 <template>
   <div id="tabBar">
+      <TabBarMenu
+          name="设置"
+          size="40"
+          :icon-component="Setting"
+      />
+      <TabBarMenu
+          name="启动台"
+          size="40"
+          :icon-component="ApplicationList"
+      />
     <div v-for="window in windows">
         <TabBarMenu v-if="!window.visible"
                     :name="window.title"
                     default-icon-text="NA"
+                    :icon-component="window.iconComponent"
                     @click="restoreWindow(window.id)"
                     size="40"
         />
@@ -14,6 +25,8 @@
 <script setup>
 import TabBarMenu from "@/components/desktop/TabBarMenu.vue";
 import { useWindowManagerStore } from '@/stores/windowManagerStore.js';
+import Setting from "@/components/icon/Setting.vue";
+import ApplicationList from "@/components/icon/ApplicationList.vue";
 const windowManager = useWindowManagerStore();
 const { windows,hideWindow,restoreWindow,bringToFront} = windowManager;
 
