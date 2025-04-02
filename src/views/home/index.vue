@@ -1,20 +1,20 @@
 <template>
   <div class="icon-grid">
+<!--    <DesktopMenu-->
+<!--        text="用户管理"-->
+<!--        default-text="用"-->
+<!--        default-icon-bg-color="#e3f2fd"-->
+<!--        default-icon-color="#1976d2"-->
+<!--        size="50"-->
+<!--        @click="openWindow(Hello, {}, '用户管理')"-->
+<!--    />-->
     <DesktopMenu
-        text="用户管理"
-        default-text="用"
+        text="Snake"
+        default-text="S"
         default-icon-bg-color="#e3f2fd"
         default-icon-color="#1976d2"
         size="50"
-        @click="openWindow(Hello, {}, '用户管理')"
-    />
-    <DesktopMenu
-        text="分类管理"
-        default-text="类"
-        default-icon-bg-color="#e3f2fd"
-        default-icon-color="#1976d2"
-        size="50"
-        @click="openWindow(Categories, {}, '分类管理')"
+        @click="openWindow(SnakeBall, {}, 'SnakeBall')"
     />
     <DesktopMenu
         text="贪吃蛇"
@@ -64,11 +64,9 @@ import {useWindowManagerStore} from '@/stores/windowManagerStore.js';
 import DesktopMenu from "@/components/desktop/DesktopMenu.vue";
 import DraggableModal from '@/components/desktop/DraggableModal.vue';
 import TabBar from "@/components/desktop/TabBar.vue";
-import Hello from "@/views/Hello.vue";
-import Word from "@/views/Word.vue";
 import SnakeGame from "@/apps/snake/SnakeGame.vue";
 import GameIcon from "@/components/icon/Game.vue"
-import Categories from "@/apps/system/categories/Categories.vue";
+import SnakeBall from "@/apps/snakbBall/SnakeBall.vue";
 
 
 const windowManager = useWindowManagerStore();
