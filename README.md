@@ -1,6 +1,6 @@
 # zixin-windows
 
-页面
+![img.png](img.png)页面
 
 ## 预览地址
 
