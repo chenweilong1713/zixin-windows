@@ -4,7 +4,7 @@
 
 ## 预览地址
 
-https://www.unuuc.cn [点我前往](https://unuuc/cn)
+https://www.unuuc.cn [点我前往](https://unuuc.cn)
 
 ## 技术栈
 
