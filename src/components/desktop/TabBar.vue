@@ -1,19 +1,26 @@
 <template>
   <div id="tabBar">
-      <TabBarMenu
+
+    <!-- TabBar默认  -->
+      <MenuIcon
           name="设置"
           size="40"
+          :show-text="false"
           :icon-component="Setting"
       />
-      <TabBarMenu
+      <MenuIcon
           name="启动台"
           size="40"
-          :icon-component="ApplicationList"
+          :show-text="false"
+          :icon-component="ApplicationListIcon"
       />
+
+    <!--  在TabBar中显示所有被隐藏的窗体  -->
     <div v-for="window in windows">
-        <TabBarMenu v-if="!window.visible"
+        <MenuIcon v-if="!window.visible"
                     :name="window.title"
-                    default-icon-text="NA"
+                    default-icon-text="A"
+                     :show-text="false"
                     :icon-component="window.iconComponent"
                     @click="restoreWindow(window.id)"
                     size="40"
@@ -23,10 +30,10 @@
 </template>
 
 <script setup>
-import TabBarMenu from "@/components/desktop/TabBarMenu.vue";
+import MenuIcon from "@/components/desktop/MenuIcon.vue";
 import { useWindowManagerStore } from '@/stores/windowManagerStore.js';
 import Setting from "@/components/icon/Setting.vue";
-import ApplicationList from "@/components/icon/ApplicationList.vue";
+import ApplicationListIcon from "@/components/icon/ApplicationList.vue";
 const windowManager = useWindowManagerStore();
 const { windows,hideWindow,restoreWindow,bringToFront} = windowManager;
 
@@ -47,11 +54,5 @@ const { windows,hideWindow,restoreWindow,bringToFront} = windowManager;
   align-items: center;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影 */
-}
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.3s ease;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
 }
 </style>

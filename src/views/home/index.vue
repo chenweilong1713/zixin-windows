@@ -1,38 +1,17 @@
 <template>
-  <div class="icon-grid">
-<!--    <DesktopMenu-->
-<!--        text="用户管理"-->
-<!--        default-text="用"-->
-<!--        default-icon-bg-color="#e3f2fd"-->
-<!--        default-icon-color="#1976d2"-->
-<!--        size="50"-->
-<!--        @click="openWindow(Hello, {}, '用户管理')"-->
-<!--    />-->
-    <DesktopMenu
-        text="Snake"
+  <!-- 桌面图标 -->
+  <div class="desktop-icon-grid">
+    <MenuIcon
+        text="小游戏"
         default-text="S"
-        default-icon-bg-color="#e3f2fd"
-        default-icon-color="#1976d2"
-        size="50"
         @click="openWindow(SnakeBall, {}, 'SnakeBall')"
     />
-    <DesktopMenu
+    <MenuIcon
         text="贪吃蛇"
-        default-text="贪"
-        default-icon-bg-color="#e3f2fd"
-        default-icon-color="#1976d2"
         :icon-component="GameIcon"
-        size="50"
+        :show-tooltip="true"
         @click="openWindow(SnakeGame, {}, '贪吃蛇',GameIcon)"
     />
-<!--    <button @click="console.log(activeWindows)">获取激活的信息</button>-->
-<!--    <button @click="console.log(windows)">获取所有存储的窗口</button>-->
-
-<!--    <template v-for="item in windows">-->
-<!--      <button v-if="!item.visible" @click="restoreWindow(item.id)">打开{{ item.title }}</button>-->
-
-<!--    </template>-->
-
   </div>
 
   <!-- 动态渲染窗口 -->
@@ -53,7 +32,6 @@
           @bring-to-front="bringToFront(window.id)"
       />
     </keep-alive>
-
   </template>
 
   <TabBar />
@@ -61,7 +39,7 @@
 
 <script setup>
 import {useWindowManagerStore} from '@/stores/windowManagerStore.js';
-import DesktopMenu from "@/components/desktop/DesktopMenu.vue";
+import MenuIcon from "@/components/desktop/MenuIcon.vue";
 import DraggableModal from '@/components/desktop/DraggableModal.vue';
 import TabBar from "@/components/desktop/TabBar.vue";
 import SnakeGame from "@/apps/snake/SnakeGame.vue";
@@ -77,7 +55,7 @@ const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManag
 
 <style scoped>
 /* 原有样式保持不变 */
-.icon-grid {
+.desktop-icon-grid {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
@@ -86,11 +64,6 @@ const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManag
   max-height: 100vh;
   gap: 16px;
   padding: 20px;
-  /*
-  background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
-  background-image: linear-gradient(to top, #f3e7e9 0%, #e3eeff 99%, #e3eeff 100%);
-  background-image: linear-gradient(-20deg, #ddd6f3 0%, #faaca8 100%, #faaca8 100%);
-   */
   background-image: linear-gradient(-225deg, #7742B2 0%, #F180FF 52%, #FD8BD9 100%);
 }
 </style>

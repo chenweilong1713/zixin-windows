@@ -4,6 +4,7 @@ import {ref, markRaw} from 'vue';
 export const useWindowManagerStore = defineStore('windowManager', () => {
     // 状态
     const windows = ref([]);
+    // 当前最大zIndex
     let maxZIndex = 1;
 
     /**
@@ -33,11 +34,6 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
     const hideWindow = (windowId) => {
         const index = windows.value.findIndex(w => w.id === windowId);
         windows.value[index].visible = false
-        // if (index !== -1) {
-        //     const [hiddenWindow] = windows.value.splice(index, 1);
-        //     hiddenWindows.value.push(hiddenWindow);
-        //     console.log('窗口已隐藏:', windowId);
-        // }
     };
 
     /**
@@ -48,12 +44,6 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
         const index = windows.value.findIndex(w => w.id === windowId);
         windows.value[index].visible = true
         bringToFront(windows.value[index].id);
-        // if (index !== -1) {
-        //     const [restoredWindow] = hiddenWindows.value.splice(index, 1);
-        //     windows.value.push(restoredWindow);
-        //     bringToFront(restoredWindow.id);
-        //     console.log('窗口已恢复:', windowId);
-        // }
     };
 
     /**

@@ -75,32 +75,19 @@ const size = reactive({...props.initialSize})
 const isDragging = ref(false)
 const isResizing = ref(false)
 const startPos = reactive({x: 0, y: 0})
-// const zIndex = ref()
-// let maxZIndex = 1
 
 
 // 最小化状态
-const isMinimized = ref(false)
 const originalSize = reactive({...props.initialSize})
 
 // 最大化状态
 const isMaximized = ref(false)
 const originalPosition = reactive({...props.initialPosition})
 
-// 计算最大zIndex
-// const updateMaxZIndex = () => {
-//   const windows = document.querySelectorAll('.draggable-window')
-//   maxZIndex = Array.from(windows).reduce((max, window) => {
-//     const z = parseInt(window.style.zIndex) || 1
-//     return Math.max(max, z)
-//   }, 1)
-// }
 
 // 置顶窗口
 const mousedownClick = () => {
-  // updateMaxZIndex()
-  // zIndex.value = maxZIndex + 1
-  console.log("点击了")
+  // 父组件去调用windowManagerStore中的函数
   emit('bringToFront', props.windowId)
 }
 
@@ -192,20 +179,8 @@ const stopResize = () => {
 
 // 最小化
 const minimize = () => {
+  // 父组件去调用windowManagerStore隐藏函数
   emit('hideWindow', props.windowId)
-  // if (isMinimized.value) {
-  //   // 恢复
-  //   size.width = originalSize.width
-  //   size.height = originalSize.height
-  // } else {
-  //   // 最小化
-  //   originalSize.width = size.width
-  //   originalSize.height = size.height
-  //   size.width = 300
-  //   size.height = 40 // 只保留标题栏高度
-  // }
-  //
-  // isMinimized.value = !isMinimized.value
 }
 
 // 最大化/恢复
@@ -237,11 +212,6 @@ const closeWindow = () => {
   emit('update:visible', false)
   emit('close', props.windowId)
 }
-
-// 组件挂载时更新最大zIndex
-onMounted(() => {
-  // updateMaxZIndex()
-})
 
 // 组件卸载时移除事件监听器
 onUnmounted(() => {
