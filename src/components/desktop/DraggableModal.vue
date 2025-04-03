@@ -278,7 +278,7 @@ onUnmounted(() => {
 
 .window-content {
   flex: 1;
-  padding: 12px;
+  //padding: 12px;
   overflow: auto;
 }
 
@@ -286,8 +286,8 @@ onUnmounted(() => {
   position: absolute;
   right: 0;
   bottom: 0;
-  width: 16px;
-  height: 16px;
+  width: 12px;
+  height: 12px;
   cursor: nwse-resize;
   background: linear-gradient(135deg, transparent 50%, #ccc 50%);
 }

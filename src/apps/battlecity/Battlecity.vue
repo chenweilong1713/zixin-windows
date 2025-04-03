@@ -1,8 +1,7 @@
 <template>
   <iframe
       src="./app/battlecity/index.html"
-      frameborder="0"
-      style="width: 100%; height: 100%;margin: 0px;padding: -10px"
+      style="width: 100%; height: 99%;"
   ></iframe>
 </template>
 <script setup>
