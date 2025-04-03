@@ -16,7 +16,7 @@
       />
 
     <!--  在TabBar中显示所有被隐藏的窗体  -->
-    <div v-for="window in windows">
+    <template v-for="window in windows">
         <MenuIcon v-if="!window.visible"
                     :name="window.title"
                     default-icon-text="A"
@@ -25,7 +25,7 @@
                     @click="restoreWindow(window.id)"
                     size="40"
         />
-    </div>
+    </template>
   </div>
 </template>
 
