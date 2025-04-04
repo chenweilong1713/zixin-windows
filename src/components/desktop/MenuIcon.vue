@@ -195,6 +195,5 @@ defineEmits(['click']);
   width: 100%;
   line-height: 1.5;
   font-size: 12px;
-  font-weight: bold;
 }
 </style>

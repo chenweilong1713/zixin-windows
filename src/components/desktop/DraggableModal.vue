@@ -278,7 +278,6 @@ onUnmounted(() => {
 
 .window-content {
   flex: 1;
-  //padding: 12px;
   overflow: auto;
 }
 
