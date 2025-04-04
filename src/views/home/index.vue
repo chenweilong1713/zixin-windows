@@ -22,7 +22,7 @@
   <template v-for="window in windows" :key="window.id">
     <keep-alive>
       <DraggableModal
-          v-if="window.visible"
+          v-show="window.visible"
           v-model:visible="window.visible"
           :title="window.title"
           :window-id="window.id"
