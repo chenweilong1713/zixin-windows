@@ -187,6 +187,7 @@ defineEmits(['click']);
   justify-content: center;
   border-radius: 20%;
   font-weight: 500;
+  font-family:"黑体",Arial,"微软雅黑","Microsoft Yahei",serif;
 }
 
 .icon-text {
