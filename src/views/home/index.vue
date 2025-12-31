@@ -1,4 +1,9 @@
 <template>
+  <!-- 个人信息区域 -->
+  <div>
+    <GithubContributionGraph />
+  </div>
+  
   <!-- 桌面图标 -->
   <div class="desktop-icon-grid">
     <MenuIcon
@@ -51,6 +56,7 @@ import GameIcon from "@/components/icon/Game.vue"
 import SnakeBall from "@/apps/snakbBall/SnakeBall.vue";
 import ArrowKeysIcon from "@/components/icon/ArrowKeys.vue";
 import Battlecity from "@/apps/battlecity/Battlecity.vue";
+import GithubContributionGraph from "@/components/GithubContributionGraph.vue";
 
 
 const windowManager = useWindowManagerStore();
