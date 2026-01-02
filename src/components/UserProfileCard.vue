@@ -24,7 +24,11 @@
       <!-- 可扩展信息 -->
       <div class="extra">
         <span>💻 {{ profile.skills.join(' / ') }}</span>
-        <span>⭐ GitHub: {{ profile.github }}</span>
+        <span class="github-link">
+          <a :href="profile.github" target="_blank" rel="noopener noreferrer">
+            <span class="github-icon">⭐</span> GitHub: {{ profile.github }}
+          </a>
+        </span>
       </div>
     </div>
   </div>
@@ -76,6 +80,11 @@ const profile: UserProfile = {
   border-radius: 50%;
   object-fit: cover;
   border: 2px solid #eee;
+  transition: transform 0.3s ease;
+}
+
+.avatar img:hover {
+  transform: translateY(-5px);
 }
 
 /* 信息区域 */
@@ -123,5 +132,19 @@ const profile: UserProfile = {
   gap: 16px;
   font-size: 13px;
   color: #777;
+}
+
+.github-link a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transition: color 0.3s ease;
+}
+
+.github-link a:hover {
+  color: #4078c0;
+  text-decoration: none;
 }
 </style>
