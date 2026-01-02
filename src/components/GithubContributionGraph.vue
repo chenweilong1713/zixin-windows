@@ -1,8 +1,9 @@
 <template>
+  <!-- 主组件 -->
   <div class="contribution-container">
     <!-- 年份切换 -->
     <div class="header">
-      <span>Contributions</span>
+      <span>GitHub Contributions</span>
       <select v-model="year" @change="fetchContributions">
         <option v-for="y in years" :key="y" :value="y">
           {{ y }}
@@ -11,9 +12,9 @@
     </div>
 
     <!-- Heatmap -->
-    <div v-if="loading" class="loading">Loading…</div>
+<!--    <div v-if="loading" class="loading">Loading…</div>-->
 
-    <div v-else class="heatmap">
+    <div class="heatmap">
       <div v-for="(week, w) in weeks" :key="w" class="week">
         <div
             v-for="day in week"
@@ -25,8 +26,10 @@
         />
       </div>
     </div>
+  </div>
 
-    <!-- Tooltip -->
+  <!-- ⭐️ Tooltip：Teleport 到 body -->
+  <Teleport to="body">
     <div
         v-if="tooltip.visible"
         class="tooltip"
@@ -35,7 +38,7 @@
       <strong>{{ tooltip.count }}</strong> 次提交<br />
       {{ tooltip.date }}
     </div>
-  </div>
+  </Teleport>
 </template>
 
 <script setup lang="ts">
@@ -43,7 +46,7 @@ import { ref, computed, onMounted } from 'vue'
 
 /* ================= 配置 ================= */
 const GITHUB_USERNAME = 'chenweilong1713'
-const GITHUB_TOKEN = 'xxx'
+const GITHUB_TOKEN = ''
 /* ======================================= */
 
 interface Day {
@@ -52,13 +55,13 @@ interface Day {
 }
 
 const loading = ref(true)
-const year = ref(new Date().getFullYear())
+const year = ref(2025)
 const contributions = ref<Day[]>([])
 
-/** GitHub 可用年份（自动往前 10 年，一般够用） */
+/** GitHub 可用年份（往前 10 年） */
 const years = Array.from({ length: 10 }, (_, i) => year.value - i)
 
-/** GitHub 官方颜色 */
+/** GitHub 官方配色 */
 const colors = [
   '#ebedf0',
   '#9be9a8',
@@ -77,10 +80,20 @@ const tooltip = ref({
 })
 
 function showTooltip(e: MouseEvent, day: Day) {
+  const offset = 12
+  let x = e.clientX + offset
+  let y = e.clientY + offset
+
+  // 防止超出右边界（可选但推荐）
+  const tooltipWidth = 120
+  if (x + tooltipWidth > window.innerWidth) {
+    x = e.clientX - tooltipWidth - offset
+  }
+
   tooltip.value = {
     visible: true,
-    x: e.pageX + 10,
-    y: e.pageY + 10,
+    x,
+    y,
     date: day.date,
     count: day.count,
   }
@@ -91,7 +104,7 @@ function hideTooltip() {
 }
 /* ========================================== */
 
-/** 拉取指定年份的贡献数据 */
+/** 拉取指定年份 GitHub 贡献数据 */
 async function fetchContributions() {
   loading.value = true
 
@@ -123,24 +136,20 @@ async function fetchContributions() {
     },
     body: JSON.stringify({
       query,
-      variables: {
-        login: GITHUB_USERNAME,
-        from,
-        to,
-      },
+      variables: { login: GITHUB_USERNAME, from, to },
     }),
   })
 
   const json = await res.json()
 
   contributions.value =
-      json.data.user.contributionsCollection.contributionCalendar.weeks
-          .flatMap((w: any) =>
-              w.contributionDays.map((d: any) => ({
-                date: d.date,
-                count: d.contributionCount,
-              }))
-          )
+    json.data.user.contributionsCollection.contributionCalendar.weeks
+      .flatMap((w: any) =>
+        w.contributionDays.map((d: any) => ({
+          date: d.date,
+          count: d.contributionCount,
+        }))
+      )
 
   loading.value = false
 }
@@ -154,9 +163,9 @@ const dataMap = computed(() => {
   return map
 })
 
-/** 构建整年 Heatmap（从第一周周日开始） */
+/** 构建整年 Heatmap（对齐 GitHub 周结构） */
 const weeks = computed(() => {
-  const result = []
+  const result: Day[][] = []
 
   const start = new Date(`${year.value}-01-01`)
   start.setDate(start.getDate() - start.getDay())
@@ -165,7 +174,7 @@ const weeks = computed(() => {
   const date = new Date(start)
 
   while (date <= end) {
-    const week = []
+    const week: Day[] = []
     for (let i = 0; i < 7; i++) {
       const key = date.toISOString().slice(0, 10)
       week.push({
@@ -190,8 +199,15 @@ function getColor(count: number) {
 </script>
 
 <style scoped>
+/* 主容器：fixed + transform 居中 */
 .contribution-container {
-  position: relative;
+  /*
+  position: fixed;
+  left: 50%;
+  top: 15%;
+
+  //transform: translateX(-50%);
+  */
   width: fit-content;
   font-family: system-ui, -apple-system, BlinkMacSystemFont;
 }
@@ -216,13 +232,13 @@ select {
 
 .heatmap {
   display: flex;
-  gap: 4px;
+  gap: 5px;
 }
 
 .week {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 5px;
 }
 
 .day {
@@ -236,10 +252,10 @@ select {
   outline: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-/* Tooltip */
+/* Tooltip（Teleport + fixed） */
 .tooltip {
-  position: absolute;
-  z-index: 10;
+  position: fixed;
+  z-index: 9999;
   background: #24292f;
   color: #fff;
   font-size: 12px;

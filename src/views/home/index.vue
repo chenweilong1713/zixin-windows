@@ -1,26 +1,29 @@
 <template>
-  <!-- 个人信息区域 -->
-  <div>
-    <GithubContributionGraph />
-  </div>
-  
-  <!-- 桌面图标 -->
-  <div class="desktop-icon-grid">
-    <MenuIcon
-        text="小游戏"
-        default-text="S"
-        @click="openWindow(SnakeBall, {}, 'SnakeBall')"
-    />
-    <MenuIcon
-        text="贪吃蛇"
-        :icon-component="GameIcon"
-        @click="openWindow(SnakeGame, {}, '贪吃蛇',GameIcon)"
-    />
-    <MenuIcon
-        text="坦克大战"
-        :icon-component="ArrowKeysIcon"
-        @click="openWindow(Battlecity, {}, '坦克大战',ArrowKeysIcon)"
-    />
+  <div class="desktop">
+
+    <!-- 个人信息区域 -->
+    <div class="my-info">
+      <UserProfileCard />
+      <br />
+      <GithubContributionGraph />
+      <div class="desktop-games">
+        <MenuIcon
+            text="小游戏"
+            default-text="S"
+            @click="openWindow(SnakeBall, {}, 'SnakeBall')"
+        />
+        <MenuIcon
+            text="贪吃蛇"
+            :icon-component="GameIcon"
+            @click="openWindow(SnakeGame, {}, '贪吃蛇',GameIcon)"
+        />
+        <MenuIcon
+            text="坦克大战"
+            :icon-component="ArrowKeysIcon"
+            @click="openWindow(Battlecity, {}, '坦克大战',ArrowKeysIcon)"
+        />
+      </div>
+    </div>
   </div>
 
   <!-- 动态渲染窗口 -->
@@ -57,6 +60,7 @@ import SnakeBall from "@/apps/snakbBall/SnakeBall.vue";
 import ArrowKeysIcon from "@/components/icon/ArrowKeys.vue";
 import Battlecity from "@/apps/battlecity/Battlecity.vue";
 import GithubContributionGraph from "@/components/GithubContributionGraph.vue";
+import UserProfileCard from "@/components/UserProfileCard.vue";
 
 
 const windowManager = useWindowManagerStore();
@@ -66,16 +70,29 @@ const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManag
 </script>
 
 <style scoped>
-/* 原有样式保持不变 */
-.desktop-icon-grid {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-content: flex-start;
-  min-height: 100vh;
-  max-height: 100vh;
-  gap: 16px;
+/* 原有样式保持不变*/
+.desktop {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
   padding: 20px;
+  gap: 16px;
   background-image: linear-gradient(-225deg, #7742B2 0%, #F180FF 52%, #FD8BD9 100%);
 }
+
+.desktop-games {
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  justify-content: flex-start;
+  margin-left: -5px;
+}
+.my-info{
+  margin: 10vh auto 0;
+  max-width: 900px;
+}
+
+
+
 </style>
