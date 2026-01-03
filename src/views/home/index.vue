@@ -77,7 +77,7 @@ const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManag
   overflow-x: hidden;
   padding: 20px;
   gap: 16px;
-  //background-image: linear-gradient(-225deg, #7742B2 0%, #F180FF 52%, #FD8BD9 100%);
+  /* background-image: linear-gradient(-225deg, #7742B2 0%, #F180FF 52%, #FD8BD9 100%); */
   background-image: linear-gradient(-225deg, #69EACB 0%, #EACCF8 48%, #6654F1 100%);
 }
 
