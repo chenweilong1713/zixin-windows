@@ -68,7 +68,7 @@ const profile: UserProfile = {
   gap: 20px;
   padding: 20px 24px;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.75);
+  background: rgba(255, 255, 255, 0.35);
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }

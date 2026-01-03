@@ -43,10 +43,10 @@
 
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
+import GithubAPI from '@/api/githubAPI'
 
 /* ================= 配置 ================= */
 const GITHUB_USERNAME = 'chenweilong1713'
-const GITHUB_TOKEN = ''
 /* ======================================= */
 
 interface Day {
@@ -108,48 +108,17 @@ function hideTooltip() {
 async function fetchContributions() {
   loading.value = true
 
-  const from = `${year.value}-01-01T00:00:00Z`
-  const to = `${year.value}-12-31T23:59:59Z`
-
-  const query = `
-    query ($login: String!, $from: DateTime!, $to: DateTime!) {
-      user(login: $login) {
-        contributionsCollection(from: $from, to: $to) {
-          contributionCalendar {
-            weeks {
-              contributionDays {
-                date
-                contributionCount
-              }
-            }
-          }
-        }
-      }
+  try {
+    const response = await GithubAPI.getContributions(GITHUB_USERNAME, year.value)
+    
+    if (response.success) {
+      contributions.value = response.data.days
+    } else {
+      console.error('获取贡献数据失败:', response.message)
     }
-  `
-
-  const res = await fetch('https://api.github.com/graphql', {
-    method: 'POST',
-    headers: {
-      Authorization: `Bearer ${GITHUB_TOKEN}`,
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      query,
-      variables: { login: GITHUB_USERNAME, from, to },
-    }),
-  })
-
-  const json = await res.json()
-
-  contributions.value =
-    json.data.user.contributionsCollection.contributionCalendar.weeks
-      .flatMap((w: any) =>
-        w.contributionDays.map((d: any) => ({
-          date: d.date,
-          count: d.contributionCount,
-        }))
-      )
+  } catch (error) {
+    console.error('请求失败:', error)
+  }
 
   loading.value = false
 }
