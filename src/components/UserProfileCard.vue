@@ -10,6 +10,7 @@
       <div class="header">
         <span class="nickname">{{ profile.nickname }}</span>
         <span class="job">{{ profile.job }}</span>
+        <span class="job">{{ profile.workingExperiences }}</span>
       </div>
 
       <div class="meta">
@@ -39,6 +40,7 @@ interface UserProfile {
   avatar: string
   nickname: string
   job: string
+  workingExperiences: string,
   city: string
   email: string
   signature: string
@@ -53,6 +55,7 @@ const profile: UserProfile = {
   avatar: 'https://avatars.githubusercontent.com/u/48249891?v=4',
   nickname: '实习两年半',
   job: 'JAVA / 全栈开发工程师',
+  workingExperiences: '4年',
   city: '中国 · 宿迁',
   email: 'chen@unuuc.cn',
   signature: '基础不牢，地动山摇。',
