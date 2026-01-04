@@ -259,7 +259,7 @@ onMounted(() => {
 }
 
 .repository-card {
-  background: white;
+  background: rgba(255, 255, 255, 0.35);
   border-radius: 10px;
   padding: 16px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
