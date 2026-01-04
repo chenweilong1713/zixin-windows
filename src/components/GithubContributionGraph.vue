@@ -109,7 +109,7 @@ async function fetchContributions() {
   loading.value = true
 
   try {
-    const response = await GithubAPI.getContributions(GITHUB_USERNAME, year.value)
+    const response: any = await GithubAPI.getContributions(GITHUB_USERNAME, year.value)
     
     if (response.success) {
       contributions.value = response.data.days
