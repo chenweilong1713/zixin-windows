@@ -7,27 +7,30 @@
 
     <!-- 个人信息区域 -->
     <div class="my-info">
+      <!--   个人信息   -->
       <UserProfileCard />
+      <!--   github统计   -->
       <GithubContributionGraph />
+      <!--   项目信息   -->
       <GithubRepositories />
-      <div class="split_title">小游戏</div>
-      <div class="desktop-flex">
+<!--      <div class="split_title">小游戏</div>-->
+<!--      <div class="desktop-flex">-->
+<!--&lt;!&ndash;        <MenuIcon&ndash;&gt;-->
+<!--&lt;!&ndash;            text="Ball"&ndash;&gt;-->
+<!--&lt;!&ndash;            default-text="S"&ndash;&gt;-->
+<!--&lt;!&ndash;            @click="openWindow(SnakeBall, {}, 'SnakeBall')"&ndash;&gt;-->
+<!--&lt;!&ndash;        />&ndash;&gt;-->
 <!--        <MenuIcon-->
-<!--            text="Ball"-->
-<!--            default-text="S"-->
-<!--            @click="openWindow(SnakeBall, {}, 'SnakeBall')"-->
+<!--            text="贪吃蛇"-->
+<!--            :icon-component="GameIcon"-->
+<!--            @click="openWindow(SnakeGame, {}, '贪吃蛇',GameIcon)"-->
 <!--        />-->
-        <MenuIcon
-            text="贪吃蛇"
-            :icon-component="GameIcon"
-            @click="openWindow(SnakeGame, {}, '贪吃蛇',GameIcon)"
-        />
-        <MenuIcon
-            text="坦克大战"
-            :icon-component="ArrowKeysIcon"
-            @click="openWindow(Battlecity, {}, '坦克大战',ArrowKeysIcon)"
-        />
-      </div>
+<!--        <MenuIcon-->
+<!--            text="坦克大战"-->
+<!--            :icon-component="ArrowKeysIcon"-->
+<!--            @click="openWindow(Battlecity, {}, '坦克大战',ArrowKeysIcon)"-->
+<!--        />-->
+<!--      </div>-->
     </div>
   </div>
 
@@ -61,7 +64,6 @@ import DraggableModal from '@/components/desktop/DraggableModal.vue';
 import TabBar from "@/components/desktop/TabBar.vue";
 import SnakeGame from "@/apps/snake/SnakeGame.vue";
 import GameIcon from "@/components/icon/Game.vue"
-import SnakeBall from "@/apps/snakbBall/SnakeBall.vue";
 import ArrowKeysIcon from "@/components/icon/ArrowKeys.vue";
 import Battlecity from "@/apps/battlecity/Battlecity.vue";
 import GithubContributionGraph from "@/components/GithubContributionGraph.vue";
