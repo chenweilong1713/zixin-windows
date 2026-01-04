@@ -7,14 +7,12 @@
           size="40"
           :show-text="false"
           :icon-component="Setting"
-          hover-direction="right"
       />
       <MenuIcon
           name="启动台"
           size="40"
           :show-text="false"
           :icon-component="ApplicationListIcon"
-          hover-direction="right"
       />
 
     <!--  在TabBar中显示所有被隐藏的窗体  -->
@@ -26,7 +24,6 @@
                     :icon-component="window.iconComponent"
                     @click="restoreWindow(window.id)"
                     size="40"
-                    hover-direction="right"
         />
     </template>
   </div>
@@ -45,24 +42,17 @@ const { windows,hideWindow,restoreWindow,bringToFront} = windowManager;
 <style scoped>
 #tabBar {
   position: fixed;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 1000;
-  width: 65px;
-  height: auto;
+  height: 65px;
   background-color: rgba(255, 255, 255, 0.2);
   border-radius: 15px;
-  display: flex;
-  flex-direction: column;
-  padding: 15px 0;
+  display: inline-flex;
+  padding: 0 5px;
   align-items: center;
-  justify-content: center;
-  gap: 10px;
   backdrop-filter: blur(10px);
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 阴影 */
-}
-#tabBar :deep(.flex-icon-container) {
-  margin: 0 !important; /* 覆盖MenuIcon的默认margin */
 }
 </style>

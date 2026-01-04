@@ -140,6 +140,12 @@ defineProps({
   hoverEffect: {
     type: Boolean,
     default: true
+  },
+  // 悬停移动方向 ('up' | 'right')，默认向上
+  hoverDirection: {
+    type: String,
+    default: 'up',
+    validator: (value) => ['up', 'right'].includes(value)
   }
 });
 
@@ -157,7 +163,7 @@ defineEmits(['click']);
 }
 
 .flex-icon-container:hover {
-  transform: v-bind('hoverEffect ? "translateY(-4px)" : "none"');
+  transform: v-bind('hoverEffect ? (hoverDirection === "right" ? "translateX(4px)" : "translateY(-4px)") : "none"');
 }
 
 .icon-wrapper {
