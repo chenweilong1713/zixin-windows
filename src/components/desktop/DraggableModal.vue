@@ -62,7 +62,7 @@ const props = defineProps({
   },
   zIndex: {
     type: Number,
-    default: 1
+    default: 200
   }
 })
 
