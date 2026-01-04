@@ -8,14 +8,15 @@
     <!-- 个人信息区域 -->
     <div class="my-info">
       <UserProfileCard />
-      <br />
       <GithubContributionGraph />
-      <div class="desktop-games">
-        <MenuIcon
-            text="小游戏"
-            default-text="S"
-            @click="openWindow(SnakeBall, {}, 'SnakeBall')"
-        />
+      <GithubRepositories />
+      <div class="split_title">小游戏</div>
+      <div class="desktop-flex">
+<!--        <MenuIcon-->
+<!--            text="Ball"-->
+<!--            default-text="S"-->
+<!--            @click="openWindow(SnakeBall, {}, 'SnakeBall')"-->
+<!--        />-->
         <MenuIcon
             text="贪吃蛇"
             :icon-component="GameIcon"
@@ -64,6 +65,7 @@ import SnakeBall from "@/apps/snakbBall/SnakeBall.vue";
 import ArrowKeysIcon from "@/components/icon/ArrowKeys.vue";
 import Battlecity from "@/apps/battlecity/Battlecity.vue";
 import GithubContributionGraph from "@/components/GithubContributionGraph.vue";
+import GithubRepositories from "@/components/GithubRepositories.vue";
 import UserProfileCard from "@/components/UserProfileCard.vue";
 import Barrage from "@/components/Barrage.vue";
 
@@ -96,8 +98,8 @@ const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManag
   z-index: 999; /* 确保弹幕在其他内容上方 */
 }
 
-.desktop-games {
-  margin-top: 20px;
+.desktop-flex {
+  margin-top: 10px;
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
@@ -107,6 +109,15 @@ const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManag
 .my-info{
   margin: 12vh auto 0;
   max-width: 900px;
+}
+.split_title{
+  font-size: 20px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.my-info > :not(:first-child) {
+  margin-top: 20px;
 }
 
 

@@ -8,6 +8,11 @@ class GithubAPI {
       year
     })
   }
+
+  // 获取指定用户的公开项目列表
+  static getRepositories(username: string) {
+    return Http.get(`/github/repositories/${username}`)
+  }
 }
 
 export default GithubAPI
