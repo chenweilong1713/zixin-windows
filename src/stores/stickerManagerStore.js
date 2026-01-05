@@ -1,7 +1,8 @@
 import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 
-const STORAGE_KEY = 'desktop-stickers'
+// 建议修改贴纸相关内容后，修改这里的版本号，要不然客户端会一直获取旧的缓存数据
+const STORAGE_KEY = 'desktop-stickers-v1'
 
 export const useStickerManagerStore = defineStore('stickerManager', () => {
     /* ================= 状态 ================= */
@@ -20,6 +21,16 @@ export const useStickerManagerStore = defineStore('stickerManager', () => {
         } catch (e) {
             console.warn('[Sticker] load failed', e)
         }
+    }
+    // 初始化时删除过期的数据
+    const removeOverdueStorage = () => {
+        // 获取所有缓存数据
+        const keys = Object.keys(localStorage)
+        keys.forEach(key => {
+            if (key.startsWith('desktop-stickers-') && key !== STORAGE_KEY) {
+                localStorage.removeItem(key)
+            }
+        })
     }
 
     const saveToStorage = () => {
@@ -100,6 +111,9 @@ export const useStickerManagerStore = defineStore('stickerManager', () => {
     /* ================= 初始化 ================= */
 
     loadFromStorage()
+    removeOverdueStorage()
+
+    // 删除旧数据
 
     return {
         stickers,
