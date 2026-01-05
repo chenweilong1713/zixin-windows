@@ -58,7 +58,7 @@ const profile: UserProfile = {
   workingExperiences: '4年',
   city: '中国 · 宿迁',
   email: 'chen@unuuc.cn',
-  signature: '基础不牢，地动山摇。',
+  signature: 'Life is short，先跑起来再说。',
   skills: ['JAVA', 'SpringBoot', 'MYSQL'],
   github: 'https://github.com/chenweilong1713'
 }
