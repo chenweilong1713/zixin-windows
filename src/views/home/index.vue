@@ -79,6 +79,7 @@ import UserProfileCard from "@/components/UserProfileCard.vue";
 import { useStickerManagerStore } from '@/stores/stickerManagerStore.js'
 import DraggableSticker from '@/components/DraggableSticker.vue'
 import {onMounted} from "vue";
+import Barrage from "@/components/Barrage.vue";
 
 const store = useStickerManagerStore()
 
