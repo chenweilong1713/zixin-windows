@@ -32,6 +32,13 @@
 <!--        />-->
 <!--      </div>-->
     </div>
+
+    <DraggableSticker
+        v-for="sticker in store.stickers"
+        :key="sticker.id"
+        :sticker="sticker"
+    />
+
   </div>
 
   <!-- 动态渲染窗口 -->
@@ -69,12 +76,32 @@ import Battlecity from "@/apps/battlecity/Battlecity.vue";
 import GithubContributionGraph from "@/components/GithubContributionGraph.vue";
 import GithubRepositories from "@/components/GithubRepositories.vue";
 import UserProfileCard from "@/components/UserProfileCard.vue";
-import Barrage from "@/components/Barrage.vue";
+import { useStickerManagerStore } from '@/stores/stickerManagerStore.js'
+import DraggableSticker from '@/components/DraggableSticker.vue'
+import {onMounted} from "vue";
 
+const store = useStickerManagerStore()
 
 const windowManager = useWindowManagerStore();
 const {windows, openWindow, hideWindow, closeWindow, bringToFront} = windowManager;
 
+
+onMounted(() => {
+  if (store.stickers.length === 0) {
+    store.createSticker('社交', [
+      {
+        name: 'GitHub',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
+        url: 'https://github.com'
+      },
+      {
+        name: 'Twitter',
+        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg',
+        url: 'https://twitter.com'
+      }
+    ])
+  }
+})
 
 </script>
 
