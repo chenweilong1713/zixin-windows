@@ -2,7 +2,7 @@ import { defineStore } from 'pinia'
 import { ref, watch } from 'vue'
 
 // 建议修改贴纸相关内容后，修改这里的版本号，要不然客户端会一直获取旧的缓存数据
-const STORAGE_KEY = 'desktop-stickers-v1'
+const STORAGE_KEY = 'desktop-stickers-v5'
 
 export const useStickerManagerStore = defineStore('stickerManager', () => {
     /* ================= 状态 ================= */

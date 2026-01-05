@@ -23,7 +23,7 @@
       </a>
     </div>
 
-    <div class="sticker-corner" />
+<!--    <div class="sticker-corner" />-->
   </div>
 </template>
 
@@ -76,7 +76,7 @@ const onMouseUp = () => {
   position: absolute;
   width: 260px;
   padding: 16px;
-  background: linear-gradient(180deg, #fffef8, #f7f3e8);
+  background: rgba(255, 255, 255, 0.55);
   border-radius: 6px;
   cursor: grab;
   user-select: none;
@@ -120,6 +120,6 @@ const onMouseUp = () => {
   bottom: 0;
   width: 40px;
   height: 40px;
-  background: linear-gradient(135deg, transparent 50%, #ded9cb 50%);
+  background: linear-gradient(135deg, transparent 80%, #ded9cb 50%);
 }
 </style>

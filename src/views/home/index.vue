@@ -93,12 +93,12 @@ onMounted(() => {
       {
         name: 'GitHub',
         icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg',
-        url: 'https://github.com'
+        url: 'https://github.com/chenweilong1713'
       },
       {
-        name: 'Twitter',
-        icon: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/twitter/twitter-original.svg',
-        url: 'https://twitter.com'
+        name: 'bilibili',
+        icon: '@/assets/img/bilibili.png',
+        url: 'https://github.com/chenweilong1713'
       }
     ])
   }
