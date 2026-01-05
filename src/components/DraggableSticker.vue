@@ -19,7 +19,7 @@
           :href="item.url"
           target="_blank"
       >
-        <img :src="item.icon" />
+        <img :src="item.icon"  alt=""/>
       </a>
     </div>
 

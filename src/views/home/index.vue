@@ -97,8 +97,13 @@ onMounted(() => {
       },
       {
         name: 'bilibili',
-        icon: '@/assets/img/bilibili.png',
-        url: 'https://github.com/chenweilong1713'
+        icon: 'assets/bilibili.svg',
+        url: 'https://space.bilibili.com/382748425'
+      },
+      {
+        name: 'QQ',
+        icon: 'assets/qq.svg',
+        url: 'tencent://message/?uin=2502906272&Site=&Menu=yes'
       }
     ])
   }
