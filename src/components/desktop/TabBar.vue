@@ -16,9 +16,18 @@
           :icon-component="ApplicationListIcon"
           hover-direction="right"
       />
+    <MenuIcon
+        name="留言"
+        size="40"
+        :show-text="false"
+        :icon-component="LiuYan"
+        @click="openWindow(MessageBoard, {}, '给我留言',LiuYan)"
+        hover-direction="right"
+    />
 
     <!--  在TabBar中显示所有被隐藏的窗体  -->
     <template v-for="window in windows">
+<!--  TODO: 这里需要判断打开的窗口是否从TaBar中打开的，如果是则在缩小的时候排除一下，不应该重复显示，还是给菜单添加提示，表示这已经打开了     -->
         <MenuIcon v-if="!window.visible"
                     :name="window.title"
                     default-icon-text="A"
@@ -37,8 +46,10 @@ import MenuIcon from "@/components/desktop/MenuIcon.vue";
 import { useWindowManagerStore } from '@/stores/windowManagerStore.js';
 import Setting from "@/components/icon/Setting.vue";
 import ApplicationListIcon from "@/components/icon/ApplicationList.vue";
+import MessageBoard from "@/views/applications/messageBoard/index.vue";
+import LiuYan from "@/components/icon/LiuYan.vue";
 const windowManager = useWindowManagerStore();
-const { windows,hideWindow,restoreWindow,bringToFront} = windowManager;
+const { windows,openWindow,hideWindow,restoreWindow,bringToFront} = windowManager;
 
 </script>
 
