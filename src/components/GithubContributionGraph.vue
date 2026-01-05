@@ -55,11 +55,16 @@ interface Day {
 }
 
 const loading = ref(true)
-const year = ref(2025)
+const year = ref('最近')
 const contributions = ref<Day[]>([])
 
 /** GitHub 可用年份（往前 10 年） */
-const years = Array.from({ length: 10 }, (_, i) => year.value - i)
+const years = Array.from({ length: 11 }, (_, i) => {
+  if (i === 0) {
+    return '最近'
+  }
+  return new Date().getFullYear() - i + 1
+})
 
 /** GitHub 官方配色 */
 const colors = [
@@ -109,8 +114,9 @@ async function fetchContributions() {
   loading.value = true
 
   try {
+    contributions.value = []
     const response: any = await GithubAPI.getContributions(GITHUB_USERNAME, year.value)
-    
+
     if (response.success) {
       contributions.value = response.data.days
     } else {
@@ -125,6 +131,27 @@ async function fetchContributions() {
 
 onMounted(fetchContributions)
 
+const getDateRange = (year: string | number | null) => {
+  // 👉 最近一年（滚动 365 天）
+  if (year === '最近' || year === null) {
+    const to = new Date()
+    const from = new Date(to)
+    from.setFullYear(to.getFullYear() - 1)
+
+    return {
+      from: from.toISOString(),
+      to: to.toISOString(),
+    }
+  }
+
+  // 👉 指定自然年
+  const yearNum = typeof year === 'string' ? parseInt(year) : year
+  return {
+    from: `${yearNum}-01-01T00:00:00Z`,
+    to: `${yearNum}-12-31T23:59:59Z`,
+  }
+}
+
 /** Map 方便查找 */
 const dataMap = computed(() => {
   const map = new Map<string, number>()
@@ -136,10 +163,18 @@ const dataMap = computed(() => {
 const weeks = computed(() => {
   const result: Day[][] = []
 
-  const start = new Date(`${year.value}-01-01`)
-  start.setDate(start.getDate() - start.getDay())
+  // 根据年份获取开始和结束日期
+  let start: Date, end: Date
+  if (year.value === '最近') {
+    const range = getDateRange('最近')
+    start = new Date(range.from)
+    end = new Date(range.to)
+  } else {
+    start = new Date(`${year.value}-01-01`)
+    start.setDate(start.getDate() - start.getDay()) // 调整为当周的周日
+    end = new Date(`${year.value}-12-31`)
+  }
 
-  const end = new Date(`${year.value}-12-31`)
   const date = new Date(start)
 
   while (date <= end) {
