@@ -51,6 +51,7 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
      * @param component 窗口内显示的组件
      * @param componentProps 传递给组件的属性
      * @param title 标题
+     * @param iconComponent
      * @returns {*|string} 返回窗口Id
      */
     const openWindow = (component, componentProps = {}, title = '新窗口', iconComponent) => {
