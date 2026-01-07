@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import BarrageAPI from "@/api/barrage"
+import BarrageAPI from '@/api/barrage.ts'
 
 /* ========= Props ========= */
 const props = withDefaults(defineProps<{
@@ -36,15 +36,6 @@ interface DanmakuItem {
   speed: number
   width?: number
   paused: boolean
-}
-
-interface MessageItem {
-  id: number
-  name: string
-  email: string
-  content: string
-  created_at: string
-  updated_at: string
 }
 
 /* ========= Config ========= */
@@ -72,10 +63,10 @@ const initDanmakus = async () => {
     const response: any = await BarrageAPI.getMessagesByName(siteName)
     
     if (response.success && response.data) {
-      // 使用API返回的留言内容
-      const messageTexts = response.data.map((msg: MessageItem) => msg.content)
+      // 使用API返回的留言内容，现在data是字符串数组
+      const messageTexts = response.data
       
-      danmakus.value = messageTexts.map((text: any) => ({
+      danmakus.value = messageTexts.map((text: string) => ({
         id: idCounter++,
         text,
         x: window.innerWidth + Math.random() * 200,
