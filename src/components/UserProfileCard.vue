@@ -54,7 +54,7 @@ interface UserProfile {
 const profile: UserProfile = {
   avatar: 'https://avatars.githubusercontent.com/u/48249891?v=4',
   nickname: '实习两年半',
-  job: 'JAVA / 全栈开发工程师',
+  job: 'JAVA / 后端开发工程师',
   workingExperiences: '4年',
   city: '中国 · 宿迁',
   email: 'chen@unuuc.cn',
