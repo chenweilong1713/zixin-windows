@@ -18,6 +18,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
+import BarrageAPI from "@/api/barrage"
 
 /* ========= Props ========= */
 const props = withDefaults(defineProps<{
@@ -37,6 +38,15 @@ interface DanmakuItem {
   paused: boolean
 }
 
+interface MessageItem {
+  id: number
+  name: string
+  email: string
+  content: string
+  created_at: string
+  updated_at: string
+}
+
 /* ========= Config ========= */
 const ROW_HEIGHT = 24
 const MAX_ROWS = 2
@@ -48,18 +58,6 @@ const danmakuRefs = ref<HTMLElement[]>([])
 let animationId = 0
 let idCounter = 0
 
-/* ========= Mock Data ========= */
-const mockTexts = [
-  'Vue3 弹幕组件',
-  '支持循环滚动',
-  '鼠标悬浮暂停',
-  'loop 开关可配置',
-  'setup + TypeScript',
-  '适合个人主页',
-    '80%AI开发',
-    '开源吗作者?'
-]
-
 /* ========= Utils ========= */
 const randomRowY = () =>
     Math.floor(Math.random() * MAX_ROWS) * ROW_HEIGHT
@@ -68,19 +66,75 @@ const randomSpeed = () => 1 + Math.random() * 1.5
 
 /* ========= Init ========= */
 const initDanmakus = async () => {
-  danmakus.value = mockTexts.map(text => ({
-    id: idCounter++,
-    text,
-    x: window.innerWidth + Math.random() * 200,
-    y: randomRowY(),
-    speed: randomSpeed(),
-    paused: false
-  }))
+  try {
+    // 从API获取留言数据，使用环境变量中的名称
+    const siteName = import.meta.env.VITE_SITE_NAME || 'unuuc.cn'
+    const response: any = await BarrageAPI.getMessagesByName(siteName)
+    
+    if (response.success && response.data) {
+      // 使用API返回的留言内容
+      const messageTexts = response.data.map((msg: MessageItem) => msg.content)
+      
+      danmakus.value = messageTexts.map((text: any) => ({
+        id: idCounter++,
+        text,
+        x: window.innerWidth + Math.random() * 200,
+        y: randomRowY(),
+        speed: randomSpeed(),
+        paused: false
+      }))
+    } else {
+      // 如果API调用失败，使用默认文本
+      const defaultTexts = [
+        'Vue3 弹幕组件',
+        '支持循环滚动',
+        '鼠标悬浮暂停',
+        'loop 开关可配置',
+        'setup + TypeScript',
+        '适合个人主页',
+        '80%AI开发',
+        '开源吗作者?'
+      ]
+      
+      danmakus.value = defaultTexts.map(text => ({
+        id: idCounter++,
+        text,
+        x: window.innerWidth + Math.random() * 200,
+        y: randomRowY(),
+        speed: randomSpeed(),
+        paused: false
+      }))
+    }
+  } catch (error) {
+    console.error('获取留言数据失败:', error)
+    // API调用失败时使用默认文本
+    const defaultTexts = [
+      'Vue3 弹幕组件',
+      '支持循环滚动',
+      '鼠标悬浮暂停',
+      'loop 开关可配置',
+      'setup + TypeScript',
+      '适合个人主页',
+      '80%AI开发',
+      '开源吗作者?'
+    ]
+    
+    danmakus.value = defaultTexts.map(text => ({
+      id: idCounter++,
+      text,
+      x: window.innerWidth + Math.random() * 200,
+      y: randomRowY(),
+      speed: randomSpeed(),
+      paused: false
+    }))
+  }
 
   await nextTick()
 
   danmakuRefs.value.forEach((el, index) => {
-    danmakus.value[index].width = el.offsetWidth
+    if (danmakus.value[index]) {
+      danmakus.value[index].width = el.offsetWidth
+    }
   })
 }
 
