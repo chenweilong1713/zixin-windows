@@ -8,6 +8,10 @@ class BarrageAPI {
         name: name
     })
   }
+
+  static createMessage(message: any)  {
+      return Http.post('/messages', message)
+  }
 }
 
 export default BarrageAPI

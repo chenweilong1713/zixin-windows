@@ -18,7 +18,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onBeforeUnmount, nextTick } from 'vue'
-import BarrageAPI from '@/api/barrage.ts'
+import BarrageAPI from '@/api/barrage'
 
 /* ========= Props ========= */
 const props = withDefaults(defineProps<{
