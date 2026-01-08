@@ -21,7 +21,7 @@
         size="40"
         :show-text="false"
         :icon-component="LiuYan"
-        @click="openWindow(MessageBoard, {}, '给我留言',LiuYan)"
+        @click="openWindow(MessageBoard, {width: 600, height: 500, x:(windowWidth/2)-300,y:120}, '给我留言',LiuYan)"
         hover-direction="right"
     />
 
@@ -48,9 +48,24 @@ import Setting from "@/components/icon/Setting.vue";
 import ApplicationListIcon from "@/components/icon/ApplicationList.vue";
 import MessageBoard from "@/views/applications/messageBoard/index.vue";
 import LiuYan from "@/components/icon/LiuYan.vue";
+
+import { ref, onMounted, onUnmounted } from 'vue'
 const windowManager = useWindowManagerStore();
 const { windows,openWindow,hideWindow,restoreWindow,bringToFront} = windowManager;
 
+const windowWidth = ref(window.innerWidth)
+
+const handleResize = () => {
+  windowWidth.value = window.innerWidth
+}
+
+onMounted(() => {
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  window.removeEventListener('resize', handleResize)
+})
 </script>
 
 <style scoped>

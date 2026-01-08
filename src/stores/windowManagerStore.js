@@ -68,6 +68,12 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
             existingWindow.visible = true;
             return existingWindow.id;
         }
+        // 从传递的属性中获取初始化的位置，如果不存在则用默认值
+        const x = componentProps.x ? componentProps.x : 300;
+        const y = componentProps.y ? componentProps.y : 50;
+        // 同样从传递的属性中获取初始化的宽高，如果不存在则用默认值
+        const width = componentProps.width ? componentProps.width : 1100;
+        const height = componentProps.height ? componentProps.height : 750;
 
         // 创建新窗口
         const windowId = `window_${Date.now()}`;
@@ -79,10 +85,10 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
                 title,
                 visible: true,
                 position: {
-                    x: 300 + (windows.value.length * 30),
-                    y: 50 + (windows.value.length * 30)
+                    x: x,
+                    y: y
                 },
-                size: {width: 1100, height: 750},
+                size: {width: width, height: height},
                 zIndex: maxZIndex + 1
             });
         } else {
@@ -94,10 +100,10 @@ export const useWindowManagerStore = defineStore('windowManager', () => {
                 visible: true,
                 iconComponent: markRaw(iconComponent),
                 position: {
-                    x: 300 + (windows.value.length * 30),
-                    y: 50 + (windows.value.length * 30)
+                    x: x,
+                    y: y
                 },
-                size: {width: 1100, height: 750},
+                size: {width: width, height: height},
                 zIndex: maxZIndex + 1
             });
         }
