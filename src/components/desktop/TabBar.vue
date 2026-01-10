@@ -2,28 +2,30 @@
   <div id="tabBar">
 
     <!-- TabBar默认  -->
+<!--      <MenuIcon-->
+<!--          name="设置"-->
+<!--          size="40"-->
+<!--          :show-text="false"-->
+<!--          :icon-component="Setting"-->
+<!--          hover-direction="right"-->
+<!--      />-->
+<!--      <MenuIcon-->
+<!--          name="启动台"-->
+<!--          size="40"-->
+<!--          :show-text="false"-->
+<!--          :icon-component="ApplicationListIcon"-->
+<!--          hover-direction="right"-->
+<!--      />-->
+    <div v-for="item in tabBarList" :key="item">
       <MenuIcon
-          name="设置"
-          size="40"
+          :name=item.name
+          :size=item.size
           :show-text="false"
-          :icon-component="Setting"
+          :icon-component=item.icon
+          @click="openWindow(item.component, item.componentProps, item.title, item.icon)"
           hover-direction="right"
       />
-      <MenuIcon
-          name="启动台"
-          size="40"
-          :show-text="false"
-          :icon-component="ApplicationListIcon"
-          hover-direction="right"
-      />
-    <MenuIcon
-        name="留言"
-        size="40"
-        :show-text="false"
-        :icon-component="LiuYan"
-        @click="openWindow(MessageBoard, {width: 600, height: 500, x:(windowWidth/2)-300,y:120}, '给我留言',LiuYan)"
-        hover-direction="right"
-    />
+    </div>
 
     <!--  在TabBar中显示所有被隐藏的窗体  -->
     <template v-for="window in windows">
@@ -37,6 +39,7 @@
                     size="40"
                     hover-direction="right"
         />
+
     </template>
   </div>
 </template>
@@ -58,6 +61,19 @@ const windowWidth = ref(window.innerWidth)
 const handleResize = () => {
   windowWidth.value = window.innerWidth
 }
+
+const tabBarList = ref([
+  {
+    name: '留言',
+    icon: LiuYan,
+    size: 40,
+    showText: false,
+    hoverDirection: 'right',
+    title: '给我留言',
+    component: MessageBoard,
+    componentProps: {width: 600, height: 500, x:(windowWidth/2)-300,y:120}
+  },
+])
 
 onMounted(() => {
   window.addEventListener('resize', handleResize)
