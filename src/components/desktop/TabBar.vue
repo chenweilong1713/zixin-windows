@@ -49,8 +49,9 @@ import MenuIcon from "@/components/desktop/MenuIcon.vue";
 import { useWindowManagerStore } from '@/stores/windowManagerStore.js';
 import Setting from "@/components/icon/Setting.vue";
 import ApplicationListIcon from "@/components/icon/ApplicationList.vue";
-import MessageBoard from "@/views/applications/messageBoard/index.vue";
+import MessageBoard from "@/views/applications/MessageBoard/index.vue";
 import LiuYan from "@/components/icon/LiuYan.vue";
+import FriendLinks from "@/views/applications/FriendLinks/index.vue"
 
 import { ref, onMounted, onUnmounted } from 'vue'
 const windowManager = useWindowManagerStore();
@@ -73,6 +74,16 @@ const tabBarList = ref([
     component: MessageBoard,
     componentProps: {width: 600, height: 500, x:(windowWidth/2)-300,y:120}
   },
+  {
+    name: '友链',
+    icon: LiuYan,
+    size: 40,
+    showText: false,
+    hoverDirection: 'right',
+    title: '友链(mock数据)',
+    component: FriendLinks,
+    componentProps: {width: 1200, height: 700}
+  }
 ])
 
 onMounted(() => {
